@@ -8,11 +8,18 @@ import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.google.i18n.phonenumbers.Phonenumber;
 
 public class Validator {
-    private static final Validator validate = new Validator();
+    private static volatile Validator instance = null;
     private Validator(){}
 
     public static Validator getInstance(){
-        return validate;
+        if (instance == null) {
+            synchronized (Validator.class) {
+                if (instance == null) {
+                    instance = new Validator();
+                }
+            }
+        }
+        return instance;
     }
 
     public boolean validateEmail(String email){
@@ -39,6 +46,7 @@ public class Validator {
         return matcher.matches();
     }
 
+    // momken n3ml map l kol country han7otha leha el code bta3ha
     public boolean validatePhoneNumber(String phoneNumber, String countryCode) {
         try {
             Phonenumber.PhoneNumber numberProto = PhoneNumberUtil.getInstance().parse(phoneNumber, countryCode);
