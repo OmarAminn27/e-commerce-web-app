@@ -9,6 +9,7 @@
   <name>e-commerce app</name>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <java.version>21</java.version>
   </properties>
   <dependencies>
     <dependency>
@@ -67,6 +68,8 @@
         </executions>
         <configuration>
           <mainClass>com.gov.iti.Main</mainClass>
+          <source>${java.version}</source>
+          <target>${java.version}</target>
           <cleanupDaemonThreads>false</cleanupDaemonThreads>
         </configuration>
       </plugin>
@@ -84,4 +87,5 @@
     </plugins>
     <finalName>ecommerce</finalName>
   </build>
+
 </project>
