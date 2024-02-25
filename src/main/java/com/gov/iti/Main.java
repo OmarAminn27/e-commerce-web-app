@@ -1,11 +1,6 @@
 package com.gov.iti;
 
-import com.gov.iti.utils.EmailSender;
-import com.gov.iti.utils.Hasher;
-import com.gov.iti.utils.Validator;
-
-import javax.mail.Session;
-import java.util.Properties;
+import com.gov.iti.business.utils.EmailSender;
 
 public class Main {
     public static void main(String[] args) {

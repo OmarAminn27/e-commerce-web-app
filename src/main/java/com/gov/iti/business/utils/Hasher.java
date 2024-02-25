@@ -1,4 +1,4 @@
-package com.gov.iti.utils;
+package com.gov.iti.business.utils;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;

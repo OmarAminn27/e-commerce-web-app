@@ -1,26 +1,26 @@
-package com.gov.iti.entities;
+package com.gov.iti.business.entities;
 
-public class OrderItem {
-    private int orderItemId;
-    private int orderId;
+public class CartItem {
+    private int cartItemId;
+    private int cartId;
     private int productId;
     private int quantity;
     private double totalPrice;
 
-    public int getOrderItemId() {
-        return orderItemId;
+    public int getCartItemId() {
+        return cartItemId;
     }
 
-    public void setOrderItemId(int orderItemId) {
-        this.orderItemId = orderItemId;
+    public void setCartItemId(int cartItemId) {
+        this.cartItemId = cartItemId;
     }
 
-    public int getOrderId() {
-        return orderId;
+    public int getCartId() {
+        return cartId;
     }
 
-    public void setOrderId(int orderId) {
-        this.orderId = orderId;
+    public void setCartId(int cartId) {
+        this.cartId = cartId;
     }
 
     public int getProductId() {

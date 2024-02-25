@@ -1,6 +1,4 @@
-package com.gov.iti.entities;
-
-import java.sql.Blob;
+package com.gov.iti.business.entities;
 
 public class Product {
     private int productId;

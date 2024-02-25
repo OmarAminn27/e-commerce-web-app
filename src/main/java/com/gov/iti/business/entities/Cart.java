@@ -1,4 +1,4 @@
-package com.gov.iti.entities;
+package com.gov.iti.business.entities;
 
 public class Cart {
     private int cartId;

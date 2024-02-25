@@ -1,4 +1,4 @@
-package com.gov.iti.entities;
+package com.gov.iti.business.entities;
 
 import java.sql.Date;
 

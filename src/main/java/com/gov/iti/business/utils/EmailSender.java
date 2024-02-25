@@ -1,4 +1,4 @@
-package com.gov.iti.utils;
+package com.gov.iti.business.utils;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
