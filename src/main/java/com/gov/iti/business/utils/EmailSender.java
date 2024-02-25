@@ -8,7 +8,7 @@ import java.util.Properties;
 public class EmailSender {
     private static final String HOST = "smtp.gmail.com";
     private static final String EMAIL = "fruitables2024@gmail.com";
-    private static final String PASSWORD = "fruit2024";
+    private static final String PASSWORD = "wgav tjvq dgck ehqa ";
     private static volatile EmailSender instance = null;
 
     private EmailSender() {
