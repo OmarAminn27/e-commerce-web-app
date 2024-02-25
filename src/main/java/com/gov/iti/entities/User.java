@@ -3,7 +3,7 @@ package com.gov.iti.entities;
 import java.sql.Date;
 
 public class User {
-    private long id;
+    private int id;
     private String username;
     private Date birthDate;
     private String password;
@@ -15,7 +15,7 @@ public class User {
     private String street;
     private String interests;
 
-    public User(long id, String username, Date birthDate, String password, String job, String email, double credit_limit, String country, String city, String street, String interests) {
+    public User(int id, String username, Date birthDate, String password, String job, String email, double credit_limit, String country, String city, String street, String interests) {
         this.id = id;
         this.username = username;
         this.birthDate = birthDate;
@@ -29,11 +29,11 @@ public class User {
         this.interests = interests;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
