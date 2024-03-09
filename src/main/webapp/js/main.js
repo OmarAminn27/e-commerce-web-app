@@ -147,5 +147,38 @@
         button.parent().parent().find('input').val(newVal);
     });
 
+    //admin users table
+    $(document).ready(function (){
+        $('.edit-btn').on('click', function (){
+            $(this).hide();
+            var saveButton = '<button class="btn btn-sm btn-success rounded-circle bg-gradient border save-btn"><i class="bi bi-check"></i></button>';
+            var cancelButton = '<button class="btn btn-sm btn-danger rounded-circle bg-gradient border cancel-btn"><i class="bi bi-x"></i></button>';
+            var row = $(this).closest('tr');
+            var editableCells = row.find('.user-edit');
+            editableCells.attr('contenteditable', 'true');
+            $(this).closest('.input-group-btn').append(saveButton + cancelButton);
+        });
+    });
+
+    $(document).on('click', '.cancel-btn, .save-btn', function (){
+        $(this).hide();
+        $('.edit-btn').show();
+        $(this).closest('.input-group-btn').find('.save-btn, .cancel-btn').remove();
+        $('.user-edit').removeAttr('contenteditable');
+    });
+
+    $(document).on('click', '#remove-product-btn', function (){
+        $(this).closest('#product-div').remove();
+    })
+
+    $(document).on('click', '#edit-product-btn', function (){
+        // $(this).closest('#product-div').remove();
+    })
+
+    $(document).on('click', '#productImage', function (){
+        window.location.href = 'admin-view-product.html';
+    })
+
+
 })(jQuery);
 
