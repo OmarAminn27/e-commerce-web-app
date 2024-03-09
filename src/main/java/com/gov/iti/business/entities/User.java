@@ -1,17 +1,25 @@
 package com.gov.iti.business.entities;
 
+import jakarta.persistence.*;
+
 import java.sql.Date;
 
+@Entity
+@Table(name = "user")
 public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String username;
     private Date birthDate;
     private String password;
     private String job;
     private String email;
+    @Column(name = "credit_limit")
     private double credit_limit;
     private String country;
     private String city;
+    @Column(name = "street_name")
     private String street;
     private String interests;
 
