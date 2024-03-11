@@ -1,33 +1,31 @@
 package com.gov.iti.business.entities;
 
-import java.util.Date;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
+import java.time.Instant;
+import java.util.LinkedHashSet;
+import java.util.Set;
+
+@Getter
+@Setter
+@Entity
+@Table(name = "orders")
 public class Order {
-    private int orderId;
-    private int userId;
-    private Date orderedAt;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "order_id", nullable = false)
+    private Integer id;
 
-    public int getOrderId() {
-        return orderId;
-    }
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
 
-    public void setOrderId(int orderId) {
-        this.orderId = orderId;
-    }
+    @Column(name = "ordered_at")
+    private Instant orderedAt;
 
-    public int getUserId() {
-        return userId;
-    }
+    @OneToMany(mappedBy = "order")
+    private Set<OrderItem> orderItems = new LinkedHashSet<>();
 
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    public Date getOrderedAt() {
-        return orderedAt;
-    }
-
-    public void setOrderedAt(Date orderedAt) {
-        this.orderedAt = orderedAt;
-    }
 }

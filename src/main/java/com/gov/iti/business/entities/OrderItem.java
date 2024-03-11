@@ -1,49 +1,33 @@
 package com.gov.iti.business.entities;
 
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.math.BigDecimal;
+
+@Getter
+@Setter
+@Entity
+@Table(name = "order_item")
 public class OrderItem {
-    private int orderItemId;
-    private int orderId;
-    private int productId;
-    private int quantity;
-    private double totalPrice;
+    @EmbeddedId
+    private OrderItemId id;
 
-    public int getOrderItemId() {
-        return orderItemId;
-    }
+    @MapsId("orderId")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "order_id", nullable = false)
+    private Order order;
 
-    public void setOrderItemId(int orderItemId) {
-        this.orderItemId = orderItemId;
-    }
+    @MapsId("productId")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "product_id", nullable = false)
+    private Product product;
 
-    public int getOrderId() {
-        return orderId;
-    }
+    @Column(name = "quantity")
+    private Integer quantity;
 
-    public void setOrderId(int orderId) {
-        this.orderId = orderId;
-    }
+    @Column(name = "total_price", precision = 15, scale = 2)
+    private BigDecimal totalPrice;
 
-    public int getProductId() {
-        return productId;
-    }
-
-    public void setProductId(int productId) {
-        this.productId = productId;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public double getTotalPrice() {
-        return totalPrice;
-    }
-
-    public void setTotalPrice(double totalPrice) {
-        this.totalPrice = totalPrice;
-    }
 }
