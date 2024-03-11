@@ -27,7 +27,7 @@ public class CartItem {
     @Column(name = "quantity")
     private Integer quantity;
 
-    @Column(name = "total_price", precision = 15, scale = 2)
-    private BigDecimal totalPrice;
+    @Column(name = "total_price")
+    private Double totalPrice;
 
 }
