@@ -3,13 +3,21 @@
              version="2.2">
     <persistence-unit name="persistenceEcommerce" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <class>com.gov.iti.business.entities.Cart</class>
+        <class>com.gov.iti.business.entities.CartItem</class>
+        <class>com.gov.iti.business.entities.CartItemId</class>
+        <class>com.gov.iti.business.entities.Order</class>
+        <class>com.gov.iti.business.entities.OrderItem</class>
+        <class>com.gov.iti.business.entities.OrderItemId</class>
+        <class>com.gov.iti.business.entities.Product</class>
+        <class>com.gov.iti.business.entities.User</class>
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
             <property name="javax.persistence.jdbc.url"
                       value="jdbc:mysql://localhost:3306/"/>
             <property name="javax.persistence.jdbc.user" value="root"/>
-            <property name="javax.persistence.jdbc.password" value="12345"/>
+            <property name="javax.persistence.jdbc.password" value="password"/>
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.format_sql" value="true"/>
             <property name="hibernate.use_sql_comments" value="true"/>

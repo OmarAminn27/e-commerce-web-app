@@ -1,127 +1,58 @@
 package com.gov.iti.business.entities;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
-import java.sql.Date;
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "user")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @Column(name = "user_id", nullable = false)
+    private Integer id;
+
+    @Column(name = "username", length = 50)
     private String username;
-    private Date birthDate;
+
+    @Column(name = "birthday")
+    private LocalDate birthday;
+
+    @Column(name = "password", length = 50)
     private String password;
+
+    @Column(name = "job", length = 100)
     private String job;
+
+    @Column(name = "email", length = 100)
     private String email;
-    @Column(name = "credit_limit")
-    private double credit_limit;
+
+    @Column(name = "credit_limit", precision = 15, scale = 2)
+    private BigDecimal creditLimit;
+
+    @Column(name = "country", length = 50)
     private String country;
+
+    @Column(name = "city", length = 50)
     private String city;
-    @Column(name = "street_name")
-    private String street;
+
+    @Column(name = "street_name", length = 100)
+    private String streetName;
+
+    @Column(name = "interests")
     private String interests;
 
-    public User(int id, String username, Date birthDate, String password, String job, String email, double credit_limit, String country, String city, String street, String interests) {
-        this.id = id;
-        this.username = username;
-        this.birthDate = birthDate;
-        this.password = password;
-        this.job = job;
-        this.email = email;
-        this.credit_limit = credit_limit;
-        this.country = country;
-        this.city = city;
-        this.street = street;
-        this.interests = interests;
-    }
+    @OneToOne(mappedBy = "user")
+    private Cart cart;
 
-    public int getId() {
-        return id;
-    }
+    @OneToMany(mappedBy = "user")
+    private Set<Order> orders = new LinkedHashSet<>();
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public Date getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(Date birthDate) {
-        this.birthDate = birthDate;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getJob() {
-        return job;
-    }
-
-    public void setJob(String job) {
-        this.job = job;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public double getCredit_limit() {
-        return credit_limit;
-    }
-
-    public void setCredit_limit(double credit_limit) {
-        this.credit_limit = credit_limit;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getStreet() {
-        return street;
-    }
-
-    public void setStreet(String street) {
-        this.street = street;
-    }
-
-    public String getInterests() {
-        return interests;
-    }
-
-    public void setInterests(String interests) {
-        this.interests = interests;
-    }
 }

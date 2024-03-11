@@ -1,22 +1,27 @@
 package com.gov.iti.business.entities;
 
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.util.LinkedHashSet;
+import java.util.Set;
+
+@Getter
+@Setter
+@Entity
+@Table(name = "cart")
 public class Cart {
-    private int cartId;
-    private int userId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "cart_id", nullable = false)
+    private Integer id;
 
-    public int getCartId() {
-        return cartId;
-    }
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
 
-    public void setCartId(int cartId) {
-        this.cartId = cartId;
-    }
+    @OneToMany(mappedBy = "cart")
+    private Set<CartItem> cartItems = new LinkedHashSet<>();
 
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
 }
