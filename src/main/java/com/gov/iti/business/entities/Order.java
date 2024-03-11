@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.Instant;
+import java.time.LocalDate;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -23,7 +24,7 @@ public class Order {
     private User user;
 
     @Column(name = "ordered_at")
-    private Instant orderedAt;
+    private LocalDate orderedAt;
 
     @OneToMany(mappedBy = "order")
     private Set<OrderItem> orderItems = new LinkedHashSet<>();

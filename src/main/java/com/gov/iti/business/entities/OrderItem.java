@@ -28,6 +28,6 @@ public class OrderItem {
     private Integer quantity;
 
     @Column(name = "total_price", precision = 15, scale = 2)
-    private BigDecimal totalPrice;
+    private Double totalPrice;
 
 }

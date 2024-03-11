@@ -7,7 +7,17 @@ public enum Products {
     CUCUMBER,     // Vegetable
     ONION,        // Vegetable
     GARLIC,       // Vegetable
-    LEMON,        // Fruit
+    BROCCOLI,     // Vegetable
+    SPINACH,      // Vegetable
+    LETTUCE,      // Vegetable
+    PEPPER,       // Vegetable
+    EGGPLANT,     // Vegetable
+    ZUCCHINI,     // Vegetable
+    ARTICHOKE,    // Vegetable
+    CELERY,       // Vegetable
+    RADISH,       // Vegetable
+    GREEN_BEAN,   // Vegetable
+    LEMON,        // Vegetable
     ORANGE,       // Fruit
     APPLE,        // Fruit
     BANANA,       // Fruit
@@ -20,16 +30,7 @@ public enum Products {
     PEACH,        // Fruit
     APRICOT,      // Fruit
     AVOCADO,      // Fruit
-    BROCCOLI,     // Vegetable
-    SPINACH,      // Vegetable
-    LETTUCE,      // Vegetable
-    PEPPER,       // Vegetable
-    EGGPLANT,     // Vegetable
-    ZUCCHINI,     // Vegetable
-    ARTICHOKE,    // Vegetable
-    CELERY,       // Vegetable
-    RADISH,       // Vegetable
-    GREEN_BEAN,   // Vegetable
+
     BASIL,        // Herb
     ROSEMARY,     // Herb
     THYME,        // Herb
