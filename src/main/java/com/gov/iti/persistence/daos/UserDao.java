@@ -23,4 +23,11 @@ public class UserDao extends AbstractDao<User> {
                 .getResultList();
         return resultList.isEmpty() ? Optional.empty() : Optional.of(resultList.getFirst());
     }
+
+    public Optional<User> findUserByName(String username, EntityManager entityManager) {
+        List<User> resultList = entityManager.createQuery("SELECT u FROM User u WHERE u.username = :username", User.class)
+                .setParameter("username", username)
+                .getResultList();
+        return resultList.isEmpty() ? Optional.empty() : Optional.of(resultList.getFirst());
+    }
 }

@@ -12,9 +12,22 @@
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>RegisterServlet</servlet-name>
+        <servlet-class>com.gov.iti.presentation.controllers.RegisterServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RegisterServlet</servlet-name>
+        <url-pattern>/register</url-pattern>
+    </servlet-mapping>
+
     <listener>
         <listener-class>com.gov.iti.presentation.listeners.ContextListener</listener-class>
     </listener>
+    
+    <welcome-file-list>
+        <welcome-file>pages/register.html</welcome-file>
+    </welcome-file-list>
 
 
 </web-app>

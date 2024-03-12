@@ -17,12 +17,12 @@ import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("ecommerce");
-        EntityManager entityManager = emf.createEntityManager();
-
-        truncateTables(entityManager);
-        addData(entityManager);
-        emf.close();
+//        EntityManagerFactory emf = Persistence.createEntityManagerFactory("ecommerce");
+//        EntityManager entityManager = emf.createEntityManager();
+//
+//        truncateTables(entityManager);
+//        addData(entityManager);
+//        emf.close();
     }
 
 
