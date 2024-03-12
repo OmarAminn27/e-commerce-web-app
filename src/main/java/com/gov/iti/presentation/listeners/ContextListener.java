@@ -9,7 +9,7 @@ import jakarta.servlet.ServletContextListener;
 public class ContextListener implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent sce) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("persistenceEcommerce");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("ecommerce");
         ServletContext sc = sce.getServletContext();
         sc.setAttribute("emf", emf);
         System.out.println("Context Initialized");
