@@ -15,6 +15,7 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("reached post method of login servlet");
+
         EntityManagerFactory emf = (EntityManagerFactory)getServletContext().getAttribute("emf");
         LoginService loginService = new LoginService(emf);
         String email = req.getParameter("email");
