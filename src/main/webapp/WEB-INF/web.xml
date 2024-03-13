@@ -18,7 +18,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
-        <url-pattern>/register</url-pattern>
+        <url-pattern>/RegisterServlet</url-pattern>
     </servlet-mapping>
 
     <listener>
@@ -28,6 +28,5 @@
     <welcome-file-list>
         <welcome-file>pages/register.html</welcome-file>
     </welcome-file-list>
-
 
 </web-app>

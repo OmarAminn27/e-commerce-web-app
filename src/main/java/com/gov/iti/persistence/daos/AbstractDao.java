@@ -22,17 +22,24 @@ public abstract class AbstractDao<T> {
     }
 
     public void create(EntityManager entityManager, T entity) {
+        entityManager.getTransaction().begin();
         entityManager.persist(entity);
+        entityManager.getTransaction().commit();
     }
 
     public T update(EntityManager entityManager, T entity) {
-        return entityManager.merge(entity);
+        entityManager.getTransaction().begin();
+        entityManager.merge(entity);
+        entityManager.getTransaction().commit();
+        return entity;
     }
 
     public void deleteById(EntityManager entityManager,int entityId) {
         T entityToRemove = entityManager.find(theClass, entityId);
         if (entityToRemove != null) { // to avoid null pointer exceptions
+            entityManager.getTransaction().begin();
             entityManager.remove(entityToRemove);
+            entityManager.getTransaction().commit();
         }
     }
 
