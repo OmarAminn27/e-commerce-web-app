@@ -8,6 +8,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
@@ -24,19 +25,31 @@ public class LoginServlet extends HttpServlet {
 
         if (user != null && user.getPassword().equals(password)) {
             System.out.println("everything is working fine");
-            RequestDispatcher dispatcher = req.getRequestDispatcher("/pages/home.html");
+            HttpSession session = req.getSession(true);
+            session.setAttribute("user", user);
+            System.out.println("dispatching to home");
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/home");
             dispatcher.forward(req, resp);
         } else {
-            System.out.println("password is incorrect");
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/pages/login.html");
+            dispatcher.forward(req, resp);
         }
-
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("reached get method of login servlet");
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/pages/login.html");
-        dispatcher.forward(req, resp);
+        HttpSession session = req.getSession(false);
+        if (session == null) {
+            System.out.println("doGet, user is null");
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/pages/login.html");
+            dispatcher.forward(req, resp);
+        } else {
+            System.out.println("doGet, user not null");
+            System.out.println("dispatching to home");
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/home");
+            dispatcher.forward(req, resp);
+        }
     }
 
 }
