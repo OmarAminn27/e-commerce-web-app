@@ -19,12 +19,22 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>HomeServlet</servlet-name>
+      <servlet-name>HomeServlet</servlet-name>
         <servlet-class>com.gov.iti.presentation.controllers.HomeServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
         <url-pattern>/home</url-pattern>
     </servlet-mapping>
+ 
+    <servlet>
+        <servlet-name>RegisterServlet</servlet-name>
+        <servlet-class>com.gov.iti.presentation.controllers.RegisterServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RegisterServlet</servlet-name>
+        <url-pattern>/RegisterServlet</url-pattern>
+    </servlet-mapping>
+
 
 </web-app>

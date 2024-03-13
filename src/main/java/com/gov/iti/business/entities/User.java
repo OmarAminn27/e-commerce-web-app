@@ -55,5 +55,20 @@ public class User {
     @OneToMany(mappedBy = "user")
     private Set<Order> orders = new LinkedHashSet<>();
 
+    public User() {
+    }
+
+    public User(String username, String email, String password, LocalDate birthday, String job, BigDecimal creditLimit, String country, String city, String streetName, String interests) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.birthday = birthday;
+        this.job = job;
+        this.creditLimit = creditLimit;
+        this.country = country;
+        this.city = city;
+        this.streetName = streetName;
+        this.interests = interests;
+    }
 
 }
