@@ -1,6 +1,7 @@
 package com.gov.iti;
 
 import com.gov.iti.business.entities.*;
+import com.gov.iti.business.services.ProductsDisplayerService;
 import com.gov.iti.business.utils.EmailSender;
 import com.gov.iti.business.utils.Products;
 import jakarta.persistence.EntityManager;
@@ -14,15 +15,17 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-//        EntityManagerFactory emf = Persistence.createEntityManagerFactory("ecommerce");
-//        EntityManager entityManager = emf.createEntityManager();
-//
-//        truncateTables(entityManager);
-//        addData(entityManager);
-//        emf.close();
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("ecommerce");
+        EntityManager entityManager = emf.createEntityManager();
+
+        truncateTables(entityManager);
+        addData(entityManager);
+
+        emf.close();
     }
 
 

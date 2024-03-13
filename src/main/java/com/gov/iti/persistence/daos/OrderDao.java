@@ -6,11 +6,11 @@ import jakarta.persistence.EntityManager;
 
 import java.util.List;
 
-public class OrderDao extends AbstractDao<OrderDao>{
+public class OrderDao extends AbstractDao<Order>{
 
     private static final OrderDao INSTANCE = new OrderDao();
     private OrderDao (){
-        super(OrderDao.class);
+        super(Order.class);
     }
 
     public static OrderDao getInstance() {
