@@ -6,6 +6,10 @@ import jakarta.persistence.Persistence;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletContextEvent;
 import jakarta.servlet.ServletContextListener;
+import jakarta.servlet.http.HttpSession;
+
+import java.util.Enumeration;
+import java.util.List;
 
 public class ContextListener implements ServletContextListener {
     @Override
