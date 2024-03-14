@@ -19,6 +19,33 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>ShowProfileServlet</servlet-name>
+        <servlet-class>com.gov.iti.presentation.controllers.ShowProfileServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ShowProfileServlet</servlet-name>
+        <url-pattern>/showProfile</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ProfileServlet</servlet-name>
+        <servlet-class>com.gov.iti.presentation.controllers.ProfileServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ProfileServlet</servlet-name>
+        <url-pattern>/profile</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>EditProfileServlet</servlet-name>
+        <servlet-class>com.gov.iti.presentation.controllers.EditProfileServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EditProfileServlet</servlet-name>
+        <url-pattern>/editProfile</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>HomeServlet</servlet-name>
         <servlet-class>com.gov.iti.presentation.controllers.HomeServlet</servlet-class>
     </servlet>
