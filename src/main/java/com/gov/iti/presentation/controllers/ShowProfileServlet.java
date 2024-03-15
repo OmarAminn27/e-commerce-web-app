@@ -2,7 +2,7 @@ package com.gov.iti.presentation.controllers;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.gov.iti.business.dtos.UserDto;
+import com.gov.iti.business.dtos.UserDTO;
 import com.gov.iti.business.entities.User;
 import com.gov.iti.business.services.ProfileService;
 import com.gov.iti.business.utils.LocalDateTypeAdapter;
@@ -24,7 +24,7 @@ public class ShowProfileServlet extends HttpServlet {
         User user = profileService.getUserData(1);
         System.out.println(user.getUsername());
 
-        UserDto userDto = new UserDto(user);
+        UserDTO userDto = new UserDTO(user);
         System.out.println("Servlet birthdate: " + userDto.getBirthday());
 //        Gson gson = new Gson();
         Gson gson = new GsonBuilder()
