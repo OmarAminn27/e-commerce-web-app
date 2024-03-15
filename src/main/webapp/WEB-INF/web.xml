@@ -91,6 +91,24 @@
         <url-pattern>/displayUsers</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>AdminViewProductsDispatcher</servlet-name>
+        <servlet-class>com.gov.iti.presentation.controllers.AdminViewProductsDispatcher</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdminViewProductsDispatcher</servlet-name>
+        <url-pattern>/adminViewProducts</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ProductUpdaterServlet</servlet-name>
+        <servlet-class>com.gov.iti.presentation.controllers.ProductUpdaterServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ProductUpdaterServlet</servlet-name>
+        <url-pattern>/updateProduct</url-pattern>
+    </servlet-mapping>
+
 
 
 </web-app>
