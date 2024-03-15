@@ -24,15 +24,18 @@ public class ShowProfileServlet extends HttpServlet {
         System.out.println(user.getUsername());
 
         UserDto userDto = new UserDto(user);
+        System.out.println("Servlet birthdate: " + userDto.getBirthday());
 //        Gson gson = new Gson();
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(LocalDate.class, new LocalDateTypeAdapter())
                 .create();
+//        Gson gson = new GsonBuilder()
+//                .setDateFormat("yyyy-MM-dd")
+//                .create();
         String jsonData = gson.toJson(userDto);
 
-        // Set content type and write JSON data to response
         resp.setContentType("application/json");
-        resp.getWriter().print(jsonData);
+        resp.getWriter().write(jsonData);
     }
 
     @Override

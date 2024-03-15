@@ -6,9 +6,11 @@ document.addEventListener("DOMContentLoaded", function() {
         if (xhr.readyState === 4) {
             if (xhr.status === 200) {
                 var data = JSON.parse(xhr.responseText);
+                console.log(data.birthday.toLocaleString());
+                console.log(data.job);
                 document.getElementById("username").value = data.username;
                 document.getElementById("email").value = data.email;
-                document.getElementById("birthdate").value = data.birthdate;
+                document.getElementById("birthdate").value = data.birthday.toLocaleString();
                 document.getElementById("job").value = data.job;
                 document.getElementById("country").value = data.country;
                 document.getElementById("city").value = data.city;
@@ -27,7 +29,7 @@ function editProfile(){
     event.preventDefault();
     document.getElementById("username").removeAttribute("disabled");
     document.getElementById("email").removeAttribute("disabled");
-    // document.getElementById("birthdate").value = data.birthdate;
+    document.getElementById("birthdate").removeAttribute("disabled");
     document.getElementById("job").removeAttribute("disabled");
     document.getElementById("country").removeAttribute("disabled");
     document.getElementById("city").removeAttribute("disabled");
@@ -58,7 +60,7 @@ function saveChanges() {
     document.getElementById("saveChangesBtn").remove();
     document.getElementById("username").setAttribute("disabled", "");
     document.getElementById("email").setAttribute("disabled", "");
-    // document.getElementById("birthdate").value = data.birthdate;
+    document.getElementById("birthdate").setAttribute("disabled", "");
     document.getElementById("job").setAttribute("disabled", "");
     document.getElementById("country").setAttribute("disabled", "");
     document.getElementById("city").setAttribute("disabled", "");
