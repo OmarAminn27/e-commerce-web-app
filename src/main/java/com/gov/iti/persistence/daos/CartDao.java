@@ -6,11 +6,11 @@ import jakarta.persistence.NoResultException;
 
 import java.util.Optional;
 
-public class CartDao extends AbstractDao <CartDao>{
+public class CartDao extends AbstractDao <Cart>{
 
     private static final CartDao INSTANCE = new CartDao();
     private CartDao() {
-        super(CartDao.class);
+        super(Cart.class);
     }
 
     public static CartDao getInstance () {

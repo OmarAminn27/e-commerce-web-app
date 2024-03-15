@@ -547,6 +547,17 @@
     cursor: pointer;
 }
 /*** Add Product Ended ***/
+
+.card-img-top {
+    max-width: 300px; /* Change this value to your desired maximum width */
+}
+
+#products {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
 .error {
     border-color: red !important;
 }
