@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @Setter
 public class UserDTO {
     private String username;
-//    private LocalDate birthday;
+    private LocalDate birthday;
     private String password;
     private String job;
     private String email;
@@ -23,7 +23,7 @@ public class UserDTO {
 
     public UserDTO(String username,  String password, String job, String email, BigDecimal creditLimit, String country, String city, String streetName, String interests) {
         this.username = username;
-//        this.birthday = birthday;
+        this.birthday = birthday;
         this.password = password;
         this.job = job;
         this.email = email;
@@ -36,7 +36,7 @@ public class UserDTO {
 
     public UserDTO(User userEntity) {
         this.username = userEntity.getUsername();
-//        this.birthday = userEntity.getBirthday();
+        this.birthday = userEntity.getBirthday();
         this.password = userEntity.getPassword();
         this.job = userEntity.getJob();
         this.email = userEntity.getEmail();
@@ -51,7 +51,7 @@ public class UserDTO {
     public String toString() {
         return "UserDTO{" +
                 "username='" + username + '\'' +
-//                ", birthday=" + birthday +
+                ", birthday=" + birthday +
                 ", password='" + password + '\'' +
                 ", job='" + job + '\'' +
                 ", email='" + email + '\'' +
@@ -63,3 +63,6 @@ public class UserDTO {
                 '}';
     }
 }
+
+
+
