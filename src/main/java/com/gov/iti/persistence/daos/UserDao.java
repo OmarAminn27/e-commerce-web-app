@@ -25,15 +25,10 @@ public class UserDao extends AbstractDao<User> {
         return resultList.isEmpty() ? Optional.empty() : Optional.of(resultList.getFirst());
     }
 
-//    public Optional<User> findById(int id, EntityManager entityManager){
-//        try{
-//            User user = entityManager.createQuery("SELECT u FROM User u WHERE u.id = :id", User.class)
-//                    .setParameter("id", id)
-//                    .getSingleResult();
-//            return Optional.ofNullable(user);
-//        }catch (NoResultException e){
-//            System.out.println("UserDao -> findById: user is null " );
-//            return Optional.empty();
-//        }
-//    }
+    public Optional<User> findUserByName(String username, EntityManager entityManager) {
+        List<User> resultList = entityManager.createQuery("SELECT u FROM User u WHERE u.username = :username", User.class)
+                .setParameter("username", username)
+                .getResultList();
+        return resultList.isEmpty() ? Optional.empty() : Optional.of(resultList.getFirst());
+    }
 }

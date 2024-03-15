@@ -47,11 +47,50 @@
 
     <servlet>
         <servlet-name>HomeServlet</servlet-name>
+        <servlet-name>ProductsDisplayerServlet</servlet-name>
+        <servlet-class>com.gov.iti.presentation.controllers.ProductsDisplayerServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ProductsDisplayerServlet</servlet-name>
+        <url-pattern>/displayProducts</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+      <servlet-name>HomeServlet</servlet-name>
         <servlet-class>com.gov.iti.presentation.controllers.HomeServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
         <url-pattern>/home</url-pattern>
     </servlet-mapping>
+ 
+    <servlet>
+        <servlet-name>RegisterServlet</servlet-name>
+        <servlet-class>com.gov.iti.presentation.controllers.RegisterServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RegisterServlet</servlet-name>
+        <url-pattern>/RegisterServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>UserProfileUpdaterServlet</servlet-name>
+        <servlet-class>com.gov.iti.presentation.controllers.UserProfileUpdaterServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UserProfileUpdaterServlet</servlet-name>
+        <url-pattern>/updateUserProfile</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>UsersDisplayerServlet</servlet-name>
+        <servlet-class>com.gov.iti.presentation.controllers.ReviewUsersDispatcher</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UsersDisplayerServlet</servlet-name>
+        <url-pattern>/displayUsers</url-pattern>
+    </servlet-mapping>
+
+
 
 </web-app>

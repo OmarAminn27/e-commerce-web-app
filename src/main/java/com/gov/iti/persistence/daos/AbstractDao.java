@@ -32,6 +32,7 @@ public abstract class AbstractDao<T> {
         entityManager.merge(entity);
         entityManager.getTransaction().commit();
         System.out.println("From user dao: user updated");
+
         return entity;
     }
 
