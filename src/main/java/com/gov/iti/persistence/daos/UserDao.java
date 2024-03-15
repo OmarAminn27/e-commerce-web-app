@@ -2,6 +2,7 @@ package com.gov.iti.persistence.daos;
 
 import com.gov.iti.business.entities.User;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.NoResultException;
 
 import java.util.List;
 import java.util.Optional;

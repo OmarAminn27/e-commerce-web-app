@@ -1,5 +1,7 @@
 package com.gov.iti.business.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.json.Json;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,6 +25,7 @@ public class User {
     private String username;
 
     @Column(name = "birthday")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd@HH:mm:ss.SSSZ")
     private LocalDate birthday;
 
     @Column(name = "password", length = 50)
@@ -70,5 +73,4 @@ public class User {
         this.streetName = streetName;
         this.interests = interests;
     }
-
 }
