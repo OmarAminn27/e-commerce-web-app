@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class EditProfileServlet extends HttpServlet {
@@ -25,26 +26,29 @@ public class EditProfileServlet extends HttpServlet {
 
         User user = new User();
 
-        user.setId(35);
+        user.setId(1);
         System.out.println(user.getId());
+
         user.setUsername(jsonNode.get("username").asText());
-        System.out.println("jsonNode " + jsonNode.get("username").asText());
         user.setEmail(jsonNode.get("email").asText());
-        System.out.println("jsonNode " + jsonNode.get("email").asText());
         user.setJob(jsonNode.get("job").asText());
-        System.out.println("jsonNode " + jsonNode.get("job").asText());
         user.setCountry(jsonNode.get("country").asText());
-        System.out.println("jsonNode " + jsonNode.get("country").asText());
         user.setCity(jsonNode.get("city").asText());
-        System.out.println("jsonNode " + jsonNode.get("city").asText());
         user.setStreetName(jsonNode.get("street").asText());
-        System.out.println("jsonNode " + jsonNode.get("street").asText());
         user.setInterests(jsonNode.get("interests").asText());
-        System.out.println("jsonNode " + jsonNode.get("interests").asText());
+        user.setCreditLimit(new BigDecimal(jsonNode.get("credit").asText()));
+        System.out.println("json credit" + jsonNode.get("credit").asText());
+        System.out.println("user credit" + user.getCreditLimit());
         String birthdayString = jsonNode.get("birthdate").asText();
+
         LocalDate birthday = LocalDate.parse(birthdayString);
+
         System.out.println("jsonNode " + jsonNode.get("birthdate").asText());
         user.setBirthday(birthday);
+
+        //password unchanged
+        User sameUser = profileService.getUserData(1);
+        user.setPassword(sameUser.getPassword());
 
         profileService.updateUser(user);
         req.getRequestDispatcher("profile").forward(req, resp);

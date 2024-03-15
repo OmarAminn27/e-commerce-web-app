@@ -21,7 +21,7 @@ public class ShowProfileServlet extends HttpServlet {
         EntityManagerFactory emf = (EntityManagerFactory) getServletContext().getAttribute("emf");
         ProfileService profileService = new ProfileService(emf);
 
-        User user = profileService.getUserData(35);
+        User user = profileService.getUserData(1);
         System.out.println(user.getUsername());
 
         UserDto userDto = new UserDto(user);

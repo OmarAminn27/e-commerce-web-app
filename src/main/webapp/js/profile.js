@@ -37,10 +37,8 @@ function editProfile(){
     document.getElementById("credit-limit").removeAttribute("disabled");
     document.getElementById("interests").removeAttribute("disabled");
 
-    // Check if the "Save Changes" button already exists
     var saveChangesBtn = document.getElementById("saveChangesBtn");
 
-    // If the button doesn't exist, create it
     if (!saveChangesBtn) {
         saveChangesBtn = document.createElement("button");
         saveChangesBtn.setAttribute("type", "button");
@@ -48,7 +46,6 @@ function editProfile(){
         saveChangesBtn.setAttribute("id", "saveChangesBtn");
         saveChangesBtn.innerHTML = "Save Changes";
 
-        // Insert the "Save Changes" button next to the "Edit Profile" button
         var editBtn = document.querySelector('.product-details .col-12 button:last-child');
         editBtn.insertAdjacentElement('afterend', saveChangesBtn);
     }
@@ -96,23 +93,6 @@ function saveChanges() {
 
     xhr.send(JSON.stringify(data));
 }
-
-
-
-// function editProfile(){
-//     var username = document.getElementById("username").value;
-//     var email = document.getElementById("email").value;
-//     // document.getElementById("birthdate").value = data.birthdate;
-//     var job = document.getElementById("job").value;
-//     var country = document.getElementById("country").value;
-//     var city = document.getElementById("city").value;
-//     var street = document.getElementById("street").value;
-//     var credit = document.getElementById("credit-limit").value;
-//     var interests = document.getElementById("interests").value;
-//
-// }
-
-
 
 //
 // $(document).ready(function (){
