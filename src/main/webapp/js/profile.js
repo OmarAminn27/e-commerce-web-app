@@ -77,15 +77,16 @@ function saveChanges() {
         city: document.getElementById("city").value,
         street: document.getElementById("street").value,
         credit: document.getElementById("credit-limit").value,
-        interests: document.getElementById("interests").value
+        interests: document.getElementById("interests").value,
+        birthdate: document.getElementById("birthdate").value
     };
 
     xhr.open("POST", url, true);
     xhr.setRequestHeader("Content-Type", "application/json");
 
     xhr.onreadystatechange = function() {
-        if (xhr.readyState === 4) {
-            if (xhr.status === 200) {
+        if (xhr.readyState == 4) {
+            if (xhr.status == 200) {
                 console.log("profile.js -> saveChanges: Data saved successfully");
             } else {
                 console.error("profile.js -> Error saving user data");

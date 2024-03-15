@@ -13,16 +13,20 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 public class EditProfileServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("EditServlet");
+        System.out.println("EditProfileServlet.doPost");
         EntityManagerFactory emf = (EntityManagerFactory) getServletContext().getAttribute("emf");
         ProfileService profileService = new ProfileService(emf);
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode jsonNode = objectMapper.readTree(req.getInputStream());
+
         User user = new User();
-        user.setId(1);
+
+        user.setId(35);
+        System.out.println(user.getId());
         user.setUsername(jsonNode.get("username").asText());
         System.out.println("jsonNode " + jsonNode.get("username").asText());
         user.setEmail(jsonNode.get("email").asText());
@@ -35,8 +39,13 @@ public class EditProfileServlet extends HttpServlet {
         System.out.println("jsonNode " + jsonNode.get("city").asText());
         user.setStreetName(jsonNode.get("street").asText());
         System.out.println("jsonNode " + jsonNode.get("street").asText());
-        System.out.println(user.getId());
-        System.out.println(user.getUsername());
+        user.setInterests(jsonNode.get("interests").asText());
+        System.out.println("jsonNode " + jsonNode.get("interests").asText());
+        String birthdayString = jsonNode.get("birthdate").asText();
+        LocalDate birthday = LocalDate.parse(birthdayString);
+        System.out.println("jsonNode " + jsonNode.get("birthdate").asText());
+        user.setBirthday(birthday);
+
         profileService.updateUser(user);
         req.getRequestDispatcher("profile").forward(req, resp);
     }

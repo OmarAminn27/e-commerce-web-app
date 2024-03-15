@@ -17,10 +17,11 @@ import java.time.LocalDate;
 public class ShowProfileServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("ShowProfileServlet.doGet");
         EntityManagerFactory emf = (EntityManagerFactory) getServletContext().getAttribute("emf");
         ProfileService profileService = new ProfileService(emf);
 
-        User user = profileService.getUserData(1);
+        User user = profileService.getUserData(35);
         System.out.println(user.getUsername());
 
         UserDto userDto = new UserDto(user);
@@ -40,6 +41,7 @@ public class ShowProfileServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("ShowProfileServlet.doPost");
         doGet(req, resp);
     }
 }
