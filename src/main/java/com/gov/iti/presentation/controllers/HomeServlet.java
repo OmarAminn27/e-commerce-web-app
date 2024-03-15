@@ -19,8 +19,6 @@ public class HomeServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession(false);
         if (session != null) {
-            // ADD filter to write on the response before forwarding
-            // or make the js url another servlet that creates the product and writes it to the response!!!!!!
             req.getRequestDispatcher("/pages/home.html").forward(req,resp);
         } else {
             req.getRequestDispatcher("/login").forward(req,resp);

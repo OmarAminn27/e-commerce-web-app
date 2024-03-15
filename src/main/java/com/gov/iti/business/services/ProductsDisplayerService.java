@@ -25,6 +25,4 @@ public class ProductsDisplayerService {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         return productDao.findAll(entityManager);
     }
-
-
 }

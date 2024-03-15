@@ -34,10 +34,6 @@ window.onload = function () {
                             </div>
                         `;
 
-
-
-
-
                         productsDiv.appendChild(productElement);
                     });
                 } catch (error) {

@@ -45,5 +45,24 @@
         <url-pattern>/RegisterServlet</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>UserProfileUpdaterServlet</servlet-name>
+        <servlet-class>com.gov.iti.presentation.controllers.UserProfileUpdaterServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UserProfileUpdaterServlet</servlet-name>
+        <url-pattern>/updateUserProfile</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>UsersDisplayerServlet</servlet-name>
+        <servlet-class>com.gov.iti.presentation.controllers.ReviewUsersDispatcher</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UsersDisplayerServlet</servlet-name>
+        <url-pattern>/displayUsers</url-pattern>
+    </servlet-mapping>
+
+
 
 </web-app>
