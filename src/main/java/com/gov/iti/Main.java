@@ -4,7 +4,6 @@ import com.gov.iti.business.entities.*;
 import com.gov.iti.business.services.ProductsDisplayerService;
 import com.gov.iti.business.utils.EmailSender;
 import com.gov.iti.business.utils.Products;
-import com.gov.iti.persistence.daos.UserDao;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
@@ -433,15 +432,6 @@ public class Main {
 //        entityManager.persist(orderItem);
 //        entityManager.getTransaction().commit();
 //        entityManager.close();
-//
-//
-//
 //    }
-
-    private static byte[] readImageBytes(String imageName) throws IOException {
-        // Assuming the img folder is in the webapp directory
-        String imagePath = System.getProperty("user.dir") + "/src/main/webapp/img/" + imageName  + ".jpg";
-        Path path = Paths.get(imagePath);
-        return Files.readAllBytes(path);
-    }
+  
 }
