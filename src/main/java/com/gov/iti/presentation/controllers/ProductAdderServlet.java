@@ -6,6 +6,7 @@ import com.gov.iti.business.entities.Product;
 import com.gov.iti.business.services.ProductUpdaterService;
 import com.gov.iti.business.services.ProductsDisplayerService;
 import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -15,32 +16,39 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
 
-public class ProductUpdaterServlet extends HttpServlet {
+public class ProductAdderServlet extends HttpServlet {
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("reached here");
         BufferedReader reader = req.getReader();
         StringBuilder jsonBody = new StringBuilder();
         String line;
         while ((line = reader.readLine()) != null) {
             jsonBody.append(line);
         }
+        System.out.println("PRODUCT ADDER SERVLET");
 
+        // Parse JSON into ProductDTO object
         ProductDTO productDTO = parseJsonToProduct(jsonBody.toString());
-        System.out.println("Received productDTO: " + productDTO.toString());
-        EntityManagerFactory emf = (EntityManagerFactory) req.getServletContext().getAttribute("emf");
+
+        Product product = new Product();
+        product.setProductName(productDTO.getProductName());
+        product.setDescription(productDTO.getDescription());
+        product.setCategory(productDTO.getCategory());
+        product.setQuantity(productDTO.getQuantity());
+        product.setPrice(productDTO.getPrice());
+
+
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("ecommerce");
         ProductUpdaterService productUpdaterService = new ProductUpdaterService(emf);
 
-        Product productFromDB = productUpdaterService.findProductByName(productDTO.getProductName());
+        productUpdaterService.addProduct(product);
 
-        productFromDB.setDescription(productDTO.getDescription());
-        productFromDB.setQuantity(productDTO.getQuantity());
-        productFromDB.setPrice(productDTO.getPrice());
-        productFromDB.setCategory(productDTO.getCategory());
-        System.out.println(productFromDB.toString());
+    }
 
-        productUpdaterService.updateProduct(productFromDB);
-
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doPost(req, resp);
     }
 
     private ProductDTO parseJsonToProduct(String json) {

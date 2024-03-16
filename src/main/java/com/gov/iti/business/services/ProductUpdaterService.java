@@ -29,4 +29,30 @@ public class ProductUpdaterService {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         return productDao.getProductByName(productName, entityManager);
     }
+
+    public void addProduct (Product product) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        EntityTransaction transaction = entityManager.getTransaction();
+        transaction.begin();
+
+        productDao.create(entityManager, product);
+
+        transaction.commit();
+        entityManager.close();
+    }
+
+    public void deleteProductByName (String productName) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        EntityTransaction transaction = entityManager.getTransaction();
+        transaction.begin();
+
+        Product productByName = productDao.getProductByName(productName, entityManager);
+        System.out.println(productByName.getId());
+        entityManager.remove(productByName);
+
+        transaction.commit();
+        entityManager.close();
+    }
+
+
 }

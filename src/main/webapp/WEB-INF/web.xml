@@ -109,6 +109,23 @@
         <url-pattern>/updateProduct</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>ProductAdderServlet</servlet-name>
+        <servlet-class>com.gov.iti.presentation.controllers.ProductAdderServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ProductAdderServlet</servlet-name>
+        <url-pattern>/addProduct</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ProductRemoverServlet</servlet-name>
+        <servlet-class>com.gov.iti.presentation.controllers.ProductRemoverServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ProductRemoverServlet</servlet-name>
+        <url-pattern>/removeProduct</url-pattern>
+    </servlet-mapping>
 
 
 </web-app>

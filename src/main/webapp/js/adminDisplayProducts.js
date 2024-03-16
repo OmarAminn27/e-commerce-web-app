@@ -28,14 +28,19 @@ function displayProducts() {
                     '<td><span>' + product.description + '</span><input type="text" style="display:none;"></td>' +
                     '<td><span>' + product.price + '</span><input type="text" style="display:none;"></td>' +
                     '<td><span>' + product.category + '</span><input type="text" style="display:none;"></td>' +
-                    '<td><button class="btn btn-primary save-btn" style="display:none;">Save</button><button class="btn btn-primary edit-btn">Edit</button></td>' + // Edit button
+                    '<td><button class="btn btn-primary save-btn" style="display:none;">Save</button><button class="btn btn-primary edit-btn">Edit</button><button class="btn btn-danger remove-btn">Remove</button></td>' + // Edit, Save, and Remove buttons
                     '</tr>';
                 tableBody.innerHTML += newRow;
             });
 
+
+
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
             // Add event listeners to edit buttons
             var editButtons = document.querySelectorAll('.edit-btn');
-            editButtons.forEach(function (button, index) {
+            editButtons.forEach(function (button) {
                 button.addEventListener('click', function () {
                     var row = button.closest('tr');
 
@@ -64,15 +69,9 @@ function displayProducts() {
 
             // Add event listeners to save buttons
             var saveButtons = document.querySelectorAll('.save-btn');
-            saveButtons.forEach(function (button, index) {
+            saveButtons.forEach(function (button) {
                 button.addEventListener('click', function () {
                     var row = button.closest('tr');
-
-                    // Hide save button
-                    button.style.display = 'none';
-                    // Show edit button
-                    var editButton = row.querySelector('.edit-btn');
-                    editButton.style.display = 'inline-block';
 
                     // Loop through row cells, excluding the first two (product name and image) and the last one (edit/save button)
                     row.querySelectorAll('td:not(:nth-child(1)):not(:nth-child(2)):not(:last-child)').forEach(function (cell) {
@@ -89,16 +88,6 @@ function displayProducts() {
                         }
                     });
 
-                    // Implement your save logic here
-                    console.log('Changes saved for row ' + (index + 1));
-                });
-            });
-
-            // Add event listeners to save buttons
-            var saveButtons = document.querySelectorAll('.save-btn');
-            saveButtons.forEach(function (button, index) {
-                button.addEventListener('click', function () {
-                    var row = button.closest('tr');
                     var product = {
                         productName: row.querySelector('td:first-child span').textContent,
                         quantity: row.querySelector('td:nth-child(3) span').textContent,
@@ -106,6 +95,12 @@ function displayProducts() {
                         price: row.querySelector('td:nth-child(5) span').textContent,
                         category: row.querySelector('td:nth-child(6) span').textContent
                     };
+
+                    // Validate quantity and price
+                    if (isNaN(product.quantity) || isNaN(product.price)) {
+                        alert('Quantity and price must be numbers');
+                        return;
+                    }
 
                     console.log(product);
                     // Create an XHR object
@@ -127,6 +122,41 @@ function displayProducts() {
                     xhr.send(JSON.stringify(product));
                 });
             });
+
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+            // add event listeners to remove Buttons
+            var removeButtons = document.querySelectorAll('.remove-btn');
+            removeButtons.forEach(function (button) {
+                button.addEventListener('click', function () {
+                    var productName = button.closest('tr').querySelector('td:first-child span').textContent;
+                    removeProduct(productName);
+                });
+            });
+
+            function removeProduct(productName) {
+                // Create an XHR object
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', '/ecommerce/removeProduct', true);
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                xhr.onload = function () {
+                    if (xhr.status >= 200 && xhr.status < 300) {
+                        console.log('Product removed successfully');
+                        setTimeout(function () {
+                            location.reload();
+                        }, 500);
+                    } else {
+                        console.error('Failed to remove product');
+                    }
+                };
+                xhr.onerror = function () {
+                    console.error('XHR request failed');
+                };
+                // Send the product name as URL-encoded parameter
+                xhr.send('productName=' + encodeURIComponent(productName));
+            }
         } else {
             console.error('Request failed');
         }
@@ -140,3 +170,4 @@ function displayProducts() {
 window.onload = function () {
     displayProducts();
 };
+
