@@ -124,11 +124,24 @@
     </div>
     <!-- Hero End -->
 
-    <div class="col-lg-9">
+    <div class="col-lg-9 m-auto">
+        <div class="dropdown text-end" id="categories">
+            <button id="categoriesBtn" class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Categories
+            </button>
+            <ul class="dropdown-menu">
+                <li><button class="dropdown-item" type="button" onclick="showCategory(this)">All</button></li>
+                <li><button class="dropdown-item" type="button" onclick="showCategory(this)">Fruits</button></li>
+                <li><button class="dropdown-item" type="button" onclick="showCategory(this)">Vegetables</button></li>
+                <li><button class="dropdown-item" type="button" onclick="showCategory(this)">Herbs</button></li>
+            </ul>
+        </div>
+
         <div class="row g-4 justify-content-center" id="products">
             <!-- Products will be appended here -->
         </div>
     </div>
+
 
 
 

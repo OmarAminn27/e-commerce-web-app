@@ -46,7 +46,6 @@
     </servlet-mapping>
 
     <servlet>
-
         <servlet-name>ProductsDisplayerServlet</servlet-name>
         <servlet-class>com.gov.iti.presentation.controllers.ProductsDisplayerServlet</servlet-class>
     </servlet>
@@ -126,5 +125,6 @@
         <servlet-name>ProductRemoverServlet</servlet-name>
         <url-pattern>/removeProduct</url-pattern>
     </servlet-mapping>
+
 
 </web-app>
