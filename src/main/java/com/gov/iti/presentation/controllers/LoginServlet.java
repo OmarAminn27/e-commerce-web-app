@@ -21,6 +21,8 @@ public class LoginServlet extends HttpServlet {
         LoginService loginService = new LoginService(emf);
         String email = req.getParameter("email");
         String password = req.getParameter("password");
+        System.out.println(password);
+
         User user = loginService.findUserByEmail(email);
 
         if (user != null && user.getPassword().equals(password)) {
