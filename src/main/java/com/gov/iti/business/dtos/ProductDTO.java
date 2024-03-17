@@ -36,4 +36,16 @@ public class ProductDTO {
         this.price = productEntity.getPrice();
         this.category = productEntity.getCategory();
     }
+
+    @Override
+    public String toString() {
+        return "ProductDTO{" +
+                "id=" + id +
+                ", productName='" + productName + '\'' +
+                ", quantity=" + quantity +
+                ", description='" + description + '\'' +
+                ", price=" + price +
+                ", category='" + category + '\'' +
+                '}';
+    }
 }
