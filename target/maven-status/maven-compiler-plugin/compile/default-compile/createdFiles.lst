@@ -1,4 +1,5 @@
 com\gov\iti\persistence\daos\CartDao.class
+com\gov\iti\presentation\controllers\LogoutServlet.class
 com\gov\iti\business\services\UserProfileUpdaterService.class
 com\gov\iti\business\entities\OrderItem.class
 com\gov\iti\business\services\LoginService.class
@@ -17,6 +18,7 @@ com\gov\iti\persistence\daos\OrderDao.class
 com\gov\iti\presentation\controllers\AdminViewProductsDispatcher.class
 com\gov\iti\presentation\controllers\ProductUpdaterServlet.class
 com\gov\iti\business\services\ProductUpdaterService.class
+com\gov\iti\business\utils\ByteArrayToBase64TypeAdapter.class
 com\gov\iti\business\utils\EmailSender.class
 com\gov\iti\presentation\controllers\ProfileServlet.class
 com\gov\iti\business\entities\User.class

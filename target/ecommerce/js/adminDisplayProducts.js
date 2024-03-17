@@ -68,6 +68,7 @@ function displayProducts() {
             });
 
             // Add event listeners to save buttons
+
             var saveButtons = document.querySelectorAll('.save-btn');
             saveButtons.forEach(function (button) {
                 button.addEventListener('click', function () {
