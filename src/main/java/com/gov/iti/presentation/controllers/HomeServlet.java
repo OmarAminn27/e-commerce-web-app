@@ -20,8 +20,10 @@ public class HomeServlet extends HttpServlet {
         System.out.println("HomeServlet.doPost");
         HttpSession session = req.getSession(false);
         if (session != null) {
+            System.out.println("session is not null");
             req.getRequestDispatcher("/pages/home.html").forward(req,resp);
         } else {
+            System.out.println("session is null");
             req.getRequestDispatcher("/login").forward(req,resp);
         }
     }

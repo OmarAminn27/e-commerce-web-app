@@ -6,6 +6,8 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
 import jakarta.servlet.ServletContext;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 public class LoginService {
 
@@ -23,5 +25,10 @@ public class LoginService {
     public User findUserByEmail (String email) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         return userDao.findByEmail(email, entityManager).orElse(null);
+    }
+
+    public boolean passwordMatches (User user, String password) {
+        PasswordEncoder encoder = new BCryptPasswordEncoder();
+        return encoder.matches(password, user.getPassword());
     }
 }
