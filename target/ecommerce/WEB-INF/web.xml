@@ -1,0 +1,93 @@
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd"
+         version="5.0" metadata-complete="true">
+    <listener>
+        <listener-class>com.gov.iti.presentation.listeners.ContextListener</listener-class>
+    </listener>
+    <listener>
+        <listener-class>com.gov.iti.presentation.listeners.SessionListener</listener-class>
+    </listener>
+
+    <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>com.gov.iti.presentation.controllers.LoginServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ShowProfileServlet</servlet-name>
+        <servlet-class>com.gov.iti.presentation.controllers.ShowProfileServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ShowProfileServlet</servlet-name>
+        <url-pattern>/showProfile</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ProfileServlet</servlet-name>
+        <servlet-class>com.gov.iti.presentation.controllers.ProfileServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ProfileServlet</servlet-name>
+        <url-pattern>/profile</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>EditProfileServlet</servlet-name>
+        <servlet-class>com.gov.iti.presentation.controllers.EditProfileServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EditProfileServlet</servlet-name>
+        <url-pattern>/editProfile</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ProductsDisplayerServlet</servlet-name>
+        <servlet-class>com.gov.iti.presentation.controllers.ProductsDisplayerServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ProductsDisplayerServlet</servlet-name>
+        <url-pattern>/displayProducts</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+      <servlet-name>HomeServlet</servlet-name>
+        <servlet-class>com.gov.iti.presentation.controllers.HomeServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>HomeServlet</servlet-name>
+        <url-pattern>/home</url-pattern>
+    </servlet-mapping>
+ 
+    <servlet>
+        <servlet-name>RegisterServlet</servlet-name>
+        <servlet-class>com.gov.iti.presentation.controllers.RegisterServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RegisterServlet</servlet-name>
+        <url-pattern>/RegisterServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>UserProfileUpdaterServlet</servlet-name>
+        <servlet-class>com.gov.iti.presentation.controllers.UserProfileUpdaterServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UserProfileUpdaterServlet</servlet-name>
+        <url-pattern>/updateUserProfile</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>UsersDisplayerServlet</servlet-name>
+        <servlet-class>com.gov.iti.presentation.controllers.ReviewUsersDispatcher</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UsersDisplayerServlet</servlet-name>
+        <url-pattern>/displayUsers</url-pattern>
+    </servlet-mapping>
+
+</web-app>
