@@ -81,10 +81,14 @@ function createProduct(productDTO) {
                                 
                     </div>
                 </div>
-                <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary align-self-center mb-2">
-                    <i class="fa fa-shopping-bag me-2 text-primary"></i> 
-                    Add to cart
-                </a>
+                <div class="d-flex align-items-center mb-3">
+                                            <label for="quantity-${productDTO.id}" class="me-2">Quantity:</label>
+                                            <input type="number" id="quantity-${productDTO.id}" class="form-control" value="1" min="1" max="${productDTO.quantity}">
+                                        </div>
+                                        <button class="btn border border-secondary rounded-pill px-3 text-primary" 
+                                        onclick="addToCart('${productDTO.id}', '${productDTO.productName}', 
+                                        '${productDTO.price}', '${productDTO.quantity}', 
+                                        document.getElementById('quantity-${productDTO.id}').value)">Add to Cart</button>
             </div>
         </div>
     `;

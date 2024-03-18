@@ -26,7 +26,7 @@ public class EditProfileServlet extends HttpServlet {
 
         User user = new User();
 
-        user.setId(1);
+        user.setId(17);
         System.out.println(user.getId());
 
         user.setUsername(jsonNode.get("username").asText());

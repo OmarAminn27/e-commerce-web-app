@@ -30,22 +30,21 @@ public class Main {
 
 
     private static void truncateTables(EntityManager entityManager) {
-        EntityTransaction transaction = entityManager.getTransaction();
-        transaction.begin();
+       EntityTransaction transaction = entityManager.getTransaction();
+       transaction.begin();
 
-        // Truncate tables first to avoid duplication
-        entityManager.createNativeQuery("DELETE FROM order_item").executeUpdate();
-        entityManager.createNativeQuery("DELETE FROM cart_item").executeUpdate();
-        entityManager.createNativeQuery("DELETE FROM cart").executeUpdate();
-        entityManager.createNativeQuery("DELETE FROM orders").executeUpdate();
-        entityManager.createNativeQuery("DELETE FROM user").executeUpdate();
-        entityManager.createNativeQuery("Delete FROM product").executeUpdate();
+       // Truncate tables first to avoid duplication
+       entityManager.createNativeQuery("DELETE FROM order_item").executeUpdate();
+       entityManager.createNativeQuery("DELETE FROM cart_item").executeUpdate();
+       entityManager.createNativeQuery("DELETE FROM cart").executeUpdate();
+       entityManager.createNativeQuery("DELETE FROM orders").executeUpdate();
+       entityManager.createNativeQuery("DELETE FROM user").executeUpdate();
+       entityManager.createNativeQuery("Delete FROM product").executeUpdate();
 
-        transaction.commit();
+       transaction.commit();
     }
 
     private static void addData(EntityManager entityManager) throws IOException {
-
         Product product1 = new Product();
         product1.setProductName(Products.APPLE.name());
         product1.setQuantity(10);
