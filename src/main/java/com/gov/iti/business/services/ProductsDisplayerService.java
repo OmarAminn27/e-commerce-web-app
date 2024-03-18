@@ -8,6 +8,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 
 import java.util.List;
+import java.util.Optional;
 
 public class ProductsDisplayerService {
     private final EntityManagerFactory entityManagerFactory;
@@ -24,5 +25,15 @@ public class ProductsDisplayerService {
     public List<Product> getAllProducts() {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         return productDao.findAll(entityManager);
+    }
+
+//    public Optional<Product> getProductById(int id){
+//        EntityManager entityManager = entityManagerFactory.createEntityManager();
+//        return productDao.findOneById(id, entityManager);
+//    }
+
+    public Product findProductById (int id) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        return productDao.findOneById(id, entityManager).orElse(null);
     }
 }

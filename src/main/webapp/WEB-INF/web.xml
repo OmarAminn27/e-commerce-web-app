@@ -46,7 +46,34 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>HomeServlet</servlet-name>
+        <servlet-name>AddToCartServlet</servlet-name>
+        <servlet-class>com.gov.iti.presentation.controllers.AddToCartServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddToCartServlet</servlet-name>
+        <url-pattern>/addToCart</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ShowCartServlet</servlet-name>
+        <servlet-class>com.gov.iti.presentation.controllers.ShowCartServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ShowCartServlet</servlet-name>
+        <url-pattern>/showCart</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>DisplayCartServlet</servlet-name>
+        <servlet-class>com.gov.iti.presentation.controllers.DisplayCartServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DisplayCartServlet</servlet-name>
+        <url-pattern>/displayCart</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+<!--        <servlet-name>HomeServlet</servlet-name>-->
         <servlet-name>ProductsDisplayerServlet</servlet-name>
         <servlet-class>com.gov.iti.presentation.controllers.ProductsDisplayerServlet</servlet-class>
     </servlet>

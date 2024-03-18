@@ -6,6 +6,8 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
 
+import java.util.Optional;
+
 public class ProductUpdaterService {
     private final EntityManagerFactory entityManagerFactory;
     private final ProductDao productDao = ProductDao.getInstance();
@@ -53,6 +55,4 @@ public class ProductUpdaterService {
         transaction.commit();
         entityManager.close();
     }
-
-
 }

@@ -12,6 +12,9 @@ import java.math.BigDecimal;
 @Table(name = "cart_item")
 public class CartItem {
     @EmbeddedId
+//    @AttributeOverrides( {
+//    @AttributeOverride(name="cart_id", column=@Column(name="cart_id", nullable=false) ),
+//    @AttributeOverride(name="product_id", column=@Column(name="product_id", nullable=false) ) } )
     private CartItemId id;
 
     @MapsId("cartId")

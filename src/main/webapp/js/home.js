@@ -26,9 +26,16 @@ window.onload = function () {
                                 <div class="p-4 border border-secondary border-top-0 rounded-bottom">
                                     <h4>${productDTO.productName}</h4>
                                     <p>${productDTO.description}</p>
-                                    <div class="d-flex justify-content-between flex-lg-wrap">
+                                    <div class="d-flex justify-content-between align-items-center flex-wrap">
                                         <p class="text-dark fs-5 fw-bold mb-0">$${productDTO.price} / kg</p>
-                                        <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                                        <div class="d-flex align-items-center mb-3">
+                                            <label for="quantity-${productDTO.id}" class="me-2">Quantity:</label>
+                                            <input type="number" id="quantity-${productDTO.id}" class="form-control" value="1" min="1" max="${productDTO.quantity}">
+                                        </div>
+                                        <button class="btn border border-secondary rounded-pill px-3 text-primary" 
+                                        onclick="addToCart('${productDTO.id}', '${productDTO.productName}', 
+                                        '${productDTO.price}', '${productDTO.quantity}', 
+                                        document.getElementById('quantity-${productDTO.id}').value)">Add to Cart</button>
                                     </div>
                                 </div>
                             </div>
