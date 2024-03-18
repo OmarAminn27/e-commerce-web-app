@@ -17,15 +17,19 @@ import java.io.IOException;
 
 public class HomeServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("HomeServlet.doPost");
         HttpSession session = req.getSession(false);
         if (session != null) {
+            System.out.println("session is not null");
             req.getRequestDispatcher("/pages/home.html").forward(req,resp);
         } else {
+            System.out.println("session is null");
             req.getRequestDispatcher("/login").forward(req,resp);
         }
     }
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("HomeServlet.doGet");
         doPost(req, resp);
     }
 }

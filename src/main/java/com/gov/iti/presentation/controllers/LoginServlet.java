@@ -17,19 +17,22 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("reached post method of login servlet");
 
-        EntityManagerFactory emf = (EntityManagerFactory)getServletContext().getAttribute("emf");
+        EntityManagerFactory emf = (EntityManagerFactory) getServletContext().getAttribute("emf");
         LoginService loginService = new LoginService(emf);
         String email = req.getParameter("email");
         String password = req.getParameter("password");
+
         User user = loginService.findUserByEmail(email);
 
-        if (user != null && user.getPassword().equals(password)) {
-            System.out.println("everything is working fine");
-            HttpSession session = req.getSession(true);
-            session.setAttribute("user", user);
-            System.out.println("dispatching to home");
-            RequestDispatcher dispatcher = req.getRequestDispatcher("/home");
-            dispatcher.forward(req, resp);
+        if (user != null) {
+            boolean passwordMatches = loginService.passwordMatches(user, password);
+            if (passwordMatches) {
+                System.out.println("the password matches");
+                HttpSession session = req.getSession(true);
+                session.setAttribute("user", user);
+                System.out.println("dispatching to home");
+                resp.sendRedirect(req.getContextPath() + "/home");
+            }
         } else {
             RequestDispatcher dispatcher = req.getRequestDispatcher("/pages/login.html");
             dispatcher.forward(req, resp);

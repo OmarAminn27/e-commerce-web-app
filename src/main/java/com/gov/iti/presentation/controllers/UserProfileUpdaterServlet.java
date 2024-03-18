@@ -2,12 +2,14 @@ package com.gov.iti.presentation.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.gov.iti.business.dtos.ProductDTO;
 import com.gov.iti.business.dtos.UserDTO;
 import com.gov.iti.business.entities.Product;
 import com.gov.iti.business.entities.User;
 import com.gov.iti.business.services.ProductsDisplayerService;
 import com.gov.iti.business.services.UserProfileUpdaterService;
+import com.gov.iti.business.utils.LocalDateTypeAdapter;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -30,9 +32,12 @@ public class UserProfileUpdaterServlet extends HttpServlet {
         List<UserDTO> userDTOs = new ArrayList<>();
         allUsers.forEach(user -> userDTOs.add(new UserDTO(user)));
         System.out.println("reached do Get user profile updater");
+        userDTOs.forEach(userDTO -> System.out.println(userDTO.toString()));
 
         // Convert User object to JSON string using Gson
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder()
+                .registerTypeAdapter(LocalDate.class, new LocalDateTypeAdapter())
+                .create();
         String json = gson.toJson(userDTOs);
         System.out.println(json);
 

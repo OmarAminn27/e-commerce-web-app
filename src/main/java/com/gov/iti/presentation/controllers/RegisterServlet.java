@@ -7,6 +7,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -54,7 +55,7 @@ public class RegisterServlet extends HttpServlet {
         String street = req.getParameter("street");
 
 
-        User user = new User(username, email, password, birthDate, job, credit, country, city, street, interests);
+        User user = new User(username, email, new BCryptPasswordEncoder().encode(password), birthDate, job, credit, country, city, street, interests);
         userDao.create(emf.createEntityManager(), user);
 
         try {

@@ -62,7 +62,7 @@
 
                     <div class="d-flex m-3 me-0">
                         <div class="my-auto">
-                            <a href="login.html" class="nav-item nav-link login-link">Login</a>
+                            <a href="#" class="nav-item nav-link login-link" id="logoutBtn">Logout</a>
                         </div>
 
                         <div class="my-auto">
@@ -124,11 +124,24 @@
     </div>
     <!-- Hero End -->
 
-    <div class="col-lg-9">
+    <div class="col-lg-9 m-auto">
+        <div class="dropdown text-end" id="categories">
+            <button id="categoriesBtn" class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Categories
+            </button>
+            <ul class="dropdown-menu">
+                <li><button class="dropdown-item" type="button" onclick="showCategory(this)">All</button></li>
+                <li><button class="dropdown-item" type="button" onclick="showCategory(this)">Fruits</button></li>
+                <li><button class="dropdown-item" type="button" onclick="showCategory(this)">Vegetables</button></li>
+                <li><button class="dropdown-item" type="button" onclick="showCategory(this)">Herbs</button></li>
+            </ul>
+        </div>
+
         <div class="row g-4 justify-content-center" id="products">
             <!-- Products will be appended here -->
         </div>
     </div>
+
 
 
 
@@ -177,6 +190,7 @@
     <script src="js/main.js"></script>
     <script src="js/home.js"></script>
     <script src="js/cart.js"></script>
+    <script src="js/logout.js"></script>
 </body>
 
 </html>
