@@ -39,7 +39,7 @@ public class ProductAdderServlet extends HttpServlet {
         product.setCategory(productDTO.getCategory());
         product.setQuantity(productDTO.getQuantity());
         product.setPrice(productDTO.getPrice());
-        product.setProductImage(productDTO.getProductImage());
+//        product.setProductImage(productDTO.getProductImage());
 
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("ecommerce");
         ProductUpdaterService productUpdaterService = new ProductUpdaterService(emf);

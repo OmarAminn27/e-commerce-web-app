@@ -11,6 +11,8 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
 import java.time.LocalDate;
 
@@ -21,18 +23,15 @@ public class ShowProfileServlet extends HttpServlet {
         EntityManagerFactory emf = (EntityManagerFactory) getServletContext().getAttribute("emf");
         ProfileService profileService = new ProfileService(emf);
 
-        User user = profileService.getUserData(17);
+        HttpSession session = req.getSession();
+        User user = (User) session.getAttribute("user");
         System.out.println(user.getUsername());
 
         UserDTO userDto = new UserDTO(user);
-        System.out.println("Servlet birthdate: " + userDto.getBirthday());
-//        Gson gson = new Gson();
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(LocalDate.class, new LocalDateTypeAdapter())
                 .create();
-//        Gson gson = new GsonBuilder()
-//                .setDateFormat("yyyy-MM-dd")
-//                .create();
+
         String jsonData = gson.toJson(userDto);
 
         resp.setContentType("application/json");

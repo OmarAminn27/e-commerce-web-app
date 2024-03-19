@@ -4,6 +4,7 @@ import com.gov.iti.business.entities.User;
 import com.gov.iti.persistence.daos.UserDao;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.EntityTransaction;
 
 public class ProfileService {
     private final EntityManagerFactory entityManagerFactory;
@@ -19,6 +20,18 @@ public class ProfileService {
 
     public void updateUser(User user){
         EntityManager entityManager = entityManagerFactory.createEntityManager();
-        userDao.update(entityManager, user);
+        EntityTransaction transaction = entityManager.getTransaction();
+        try{
+            entityManager.getTransaction().begin();
+            userDao.update(entityManager, user);
+            entityManager.getTransaction().commit();
+        }catch (Exception e) {
+            if (transaction.isActive()) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            entityManager.close();
+        }
     }
 }
