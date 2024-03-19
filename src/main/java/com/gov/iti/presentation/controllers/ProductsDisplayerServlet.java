@@ -15,6 +15,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ProductsDisplayerServlet extends HttpServlet {
     @Override
@@ -23,14 +24,13 @@ public class ProductsDisplayerServlet extends HttpServlet {
         ProductsDisplayerService productsDisplayerService = new ProductsDisplayerService(emf);
         List<Product> allProducts = productsDisplayerService.getAllProducts();
 
-        List<ProductDTO> productDTOS = new ArrayList<>();
-
-        allProducts.forEach(product -> productDTOS.add(new ProductDTO(product)));
-
+        List<ProductDTO> productDTOs = allProducts.stream()
+                .map(ProductDTO::new)
+                .toList();
 
         // Convert Product object to JSON string using Gson
         ObjectMapper objectMapper = new ObjectMapper();
-        String json = objectMapper.writeValueAsString(productDTOS);
+        String json = objectMapper.writeValueAsString(productDTOs);
 
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
