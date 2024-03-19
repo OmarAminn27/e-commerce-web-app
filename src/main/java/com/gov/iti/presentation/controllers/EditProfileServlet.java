@@ -11,6 +11,8 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -24,10 +26,8 @@ public class EditProfileServlet extends HttpServlet {
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode jsonNode = objectMapper.readTree(req.getInputStream());
 
-        User user = new User();
-
-        user.setId(17);
-        System.out.println(user.getId());
+        HttpSession session = req.getSession();
+        User user = (User) session.getAttribute("user");
 
         user.setUsername(jsonNode.get("username").asText());
         user.setEmail(jsonNode.get("email").asText());
@@ -37,17 +37,14 @@ public class EditProfileServlet extends HttpServlet {
         user.setStreetName(jsonNode.get("street").asText());
         user.setInterests(jsonNode.get("interests").asText());
         user.setCreditLimit(new BigDecimal(jsonNode.get("credit").asText()));
-        System.out.println("json credit" + jsonNode.get("credit").asText());
-        System.out.println("user credit" + user.getCreditLimit());
         String birthdayString = jsonNode.get("birthdate").asText();
 
         LocalDate birthday = LocalDate.parse(birthdayString);
 
-        System.out.println("jsonNode " + jsonNode.get("birthdate").asText());
         user.setBirthday(birthday);
 
         //password unchanged
-        User sameUser = profileService.getUserData(1);
+        User sameUser = profileService.getUserData(user.getId());
         user.setPassword(sameUser.getPassword());
 
         profileService.updateUser(user);

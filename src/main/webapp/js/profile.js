@@ -77,13 +77,22 @@ function saveChanges() {
         interests: document.getElementById("interests").value,
         birthdate: document.getElementById("birthdate").value
     };
+    console.log(data.username);
+    console.log(data.email);
+    console.log(data.job);
+    console.log(data.country);
+    console.log(data.city);
+    console.log(data.street);
+    console.log(data.credit);
+    console.log(data.interests);
+    console.log(data.birthdate);
 
     xhr.open("POST", url, true);
     xhr.setRequestHeader("Content-Type", "application/json");
 
     xhr.onreadystatechange = function() {
-        if (xhr.readyState == 4) {
-            if (xhr.status == 200) {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
                 console.log("profile.js -> saveChanges: Data saved successfully");
             } else {
                 console.error("profile.js -> Error saving user data");
@@ -93,28 +102,3 @@ function saveChanges() {
 
     xhr.send(JSON.stringify(data));
 }
-
-//
-// $(document).ready(function (){
-//     $.ajax({
-//         url: 'showProfile',
-//         method: 'GET',
-//         dataType: 'json',
-//         success: function(data) {
-//             // Update your HTML elements with the received data
-//             $("#username").val(data.username);
-//             $("#email").val(data.email);
-//             // $("#birthdate").val(data.birthdate);
-//             $("#job").val(data.job);
-//             $("#country").val(data.country);
-//             $("#city").val(data.city);
-//             $("#street").val(data.street);
-//             $("#credit-limit").val(data.creditLimit);
-//             $("#interests").val(data.interests);
-//         },
-//         error: function() {
-//             console.error("Error fetching user data");
-//         }
-//     });
-// });
-

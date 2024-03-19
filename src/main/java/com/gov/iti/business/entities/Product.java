@@ -21,8 +21,8 @@ public class Product {
     @Column(name = "product_name", length = 50)
     private String productName;
 
-    @Column(name = "product_image")
-    private byte[] productImage;
+//    @Column(name = "product_image")
+//    private byte[] productImage;
 
     @Column(name = "quantity")
     private Integer quantity;
