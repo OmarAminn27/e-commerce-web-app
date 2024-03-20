@@ -1,3 +1,4 @@
+//@ts-check
 // Function to send XHR request and update the table with products data
 function displayProducts() {
     // Create an XHR object
@@ -19,11 +20,12 @@ function displayProducts() {
             // Loop through the products and append them to the table
             products.forEach(function (product, index) {
                 // Convert image data to Base64
-                var base64Image = 'data:image/jpeg;base64,' + product.productImage;
-
+                // var base64Image = 'data:image/jpeg;base64,' + product.productImage;
                 var newRow = '<tr>' +
                     '<td><span>' + product.productName + '</span><input type="text" style="display:none;"></td>' +
-                    '<td><img src="' + base64Image + '" alt="' + product.productName + '" style="width: 100px; height: 100px;"></td>' +
+                    '<td>'+
+                    `<img src="https://iti.blob.core.windows.net/e-commerce-images/${product.productName}.jpg" style="width: 100px; height: 100px;">` +
+                    '</td>' +
                     '<td><span>' + product.quantity + '</span><input type="text" style="display:none;"></td>' +
                     '<td><span>' + product.description + '</span><input type="text" style="display:none;"></td>' +
                     '<td><span>' + product.price + '</span><input type="text" style="display:none;"></td>' +
