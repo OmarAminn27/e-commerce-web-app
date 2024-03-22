@@ -19,7 +19,13 @@ function addProductRow() {
         '<td><input type="number" class="form-control"></td>' + // Quantity
         '<td><input type="text" class="form-control"></td>' + // Description
         '<td><input type="number" class="form-control"></td>' + // Price
-        '<td><input type="text" class="form-control"></td>' + // Category
+        `<td>
+            <select class="form-control">
+                <option value="Fruits">FRUITS</option>
+                <option value="Vegetables">VEGETABLES</option>
+                <option value="Herbs">HERBS</option>
+            </select>
+        </td>` + // Category
         '<td><button class="btn btn-primary add-btn">Add</button></td>' + // Add button
         '</tr>';
 
@@ -47,7 +53,7 @@ function addProductRow() {
                 quantity: tableBody.firstElementChild.querySelector('td:nth-child(3) input').value,
                 description: tableBody.firstElementChild.querySelector('td:nth-child(4) input').value,
                 price: tableBody.firstElementChild.querySelector('td:nth-child(5) input').value,
-                category: tableBody.firstElementChild.querySelector('td:nth-child(6) input').value
+                category: tableBody.firstElementChild.querySelector('td:nth-child(6) select').value
             };
 
 
@@ -56,6 +62,15 @@ function addProductRow() {
                 console.error('All fields must be filled out');
                 return;
             }
+            if(isNaN(productDTO.quantity) || isNaN(productDTO.price)){
+                console.error('Quantity and price must be numbers');
+                return;
+            }
+            if(productDTO.quantity < 0 || productDTO.price < 0){
+                console.error('Quantity and price must be positive');
+                return;
+            }
+            // if(productDTO.category !== 'Fruits' && productDTO.category !== 'Vegetables' && productDTO.category !== 'HERBS'){
             console.log(productDTO);
 
             // Send the product data to the server
