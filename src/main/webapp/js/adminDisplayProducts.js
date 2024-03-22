@@ -24,7 +24,7 @@ function displayProducts() {
                 var newRow = '<tr>' +
                     '<td><span>' + product.productName + '</span><input type="text" style="display:none;"></td>' +
                     '<td>'+
-                    `<img src="https://iti.blob.core.windows.net/e-commerce-images/${product.productName}.jpg" style="width: 100px; height: 100px;">` +
+                    `<img src="https://iti.blob.core.windows.net/e-commerce-images/${product.productName.toUpperCase()}.jpg" style="width: 100px; height: 100px;">` +
                     '</td>' +
                     '<td><span>' + product.quantity + '</span><input type="text" style="display:none;"></td>' +
                     '<td><span>' + product.description + '</span><input type="text" style="display:none;"></td>' +
@@ -33,6 +33,7 @@ function displayProducts() {
                     '<td><button class="btn btn-primary save-btn" style="display:none;">Save</button><button class="btn btn-primary edit-btn">Edit</button><button class="btn btn-danger remove-btn">Remove</button></td>' + // Edit, Save, and Remove buttons
                     '</tr>';
                 tableBody.innerHTML += newRow;
+                console.log(product.productName.toUpperCase());
             });
 
 

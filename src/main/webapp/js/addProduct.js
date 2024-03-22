@@ -50,6 +50,7 @@ function addProductRow() {
                 category: tableBody.firstElementChild.querySelector('td:nth-child(6) input').value
             };
 
+
             // Validate product data
             if (!productDTO.productName || !productDTO.quantity || !productDTO.description || !productDTO.price || !productDTO.category) {
                 console.error('All fields must be filled out');

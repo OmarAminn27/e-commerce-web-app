@@ -15,14 +15,16 @@ public class ProductDTO {
     private String description;
     private BigDecimal price;
     private String category;
+    private String productImage;
 
-    public ProductDTO(Integer id, String productName, Integer quantity, String description, BigDecimal price, String category) {
+    public ProductDTO(Integer id, String productName, Integer quantity, String description, BigDecimal price, String category, String productImage) {
         this.id = id;
         this.productName = productName;
         this.quantity = quantity;
         this.description = description;
         this.price = price;
         this.category = category;
+        this.productImage = productImage;
     }
 
     public ProductDTO(Product productEntity) {
