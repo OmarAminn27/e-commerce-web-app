@@ -20,12 +20,12 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("ecommerce");
-        EntityManager entityManager = emf.createEntityManager();
-        truncateTables(entityManager);
-        addData(entityManager);
-
-        entityManager.close();
+//        EntityManagerFactory emf = Persistence.createEntityManagerFactory("ecommerce");
+//        EntityManager entityManager = emf.createEntityManager();
+//        truncateTables(entityManager);
+//        addData(entityManager);
+//
+//        entityManager.close();
     }
 
 
