@@ -28,13 +28,13 @@ public class ProductAdderServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("ProductAdderServlet.doPost");
         BufferedReader reader = req.getReader();
         StringBuilder jsonBody = new StringBuilder();
         String line;
         while ((line = reader.readLine()) != null) {
             jsonBody.append(line);
         }
-        System.out.println("PRODUCT ADDER SERVLET");
 
         // Parse JSON into ProductDTO object
         ProductDTO productDTO = parseJsonToProduct(jsonBody.toString());
@@ -51,7 +51,8 @@ public class ProductAdderServlet extends HttpServlet {
         System.out.println("Product: " + product.toString());
 
         String imageBase64Encoded = productDTO.getProductImage();
-//        System.out.println("Image: " + image);
+        imageBase64Encoded = imageBase64Encoded.split(",")[1];
+        System.out.println("Image: " + imageBase64Encoded);
 
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("ecommerce");
         ProductUpdaterService productUpdaterService = new ProductUpdaterService(emf);

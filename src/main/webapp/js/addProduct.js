@@ -56,6 +56,7 @@ function addProductRow() {
                 console.error('All fields must be filled out');
                 return;
             }
+            console.log(productDTO);
 
             // Send the product data to the server
             var xh2 = new XMLHttpRequest();
