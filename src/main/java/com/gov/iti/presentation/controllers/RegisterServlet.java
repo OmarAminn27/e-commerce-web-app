@@ -59,7 +59,7 @@ public class RegisterServlet extends HttpServlet {
         userDao.create(emf.createEntityManager(), user);
 
         try {
-            resp.sendRedirect("pages/login.html");
+            resp.sendRedirect("login");
         } catch (IOException e) {
             e.printStackTrace();
         }

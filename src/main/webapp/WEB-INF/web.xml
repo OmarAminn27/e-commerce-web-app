@@ -2,6 +2,8 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd"
          version="5.0" metadata-complete="true">
+
+
     <listener>
         <listener-class>com.gov.iti.presentation.listeners.ContextListener</listener-class>
     </listener>
@@ -169,6 +171,15 @@
     <servlet-mapping>
         <servlet-name>CheckoutServlet</servlet-name>
         <url-pattern>/checkout</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>RegistrationDispatcher</servlet-name>
+        <servlet-class>com.gov.iti.presentation.controllers.RegistrationDispatcher</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RegistrationDispatcher</servlet-name>
+        <url-pattern>/register</url-pattern>
     </servlet-mapping>
 
 </web-app>
