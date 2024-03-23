@@ -33,4 +33,16 @@ public class CartItem {
     @Column(name = "total_price")
     private Double totalPrice;
 
+    @Override
+    public String toString() {
+        return "CartItem{" +
+                "id=" + id +
+                ", cart=" + cart +
+                ", product=" + product +
+                ", quantity=" + quantity +
+                ", totalPrice=" + totalPrice +
+                '}';
+    }
+
+
 }

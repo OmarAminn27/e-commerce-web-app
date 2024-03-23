@@ -30,8 +30,7 @@ public class ShowCartServlet extends HttpServlet {
         HttpSession session = req.getSession(false);
         if (session != null){
             User loggedInUser = (User) session.getAttribute("user");
-            EntityManager entityManager = emf.createEntityManager();
-            entityManager.merge(loggedInUser);
+            System.out.println(loggedInUser.getUsername());
             Cart cart = loggedInUser.getCart();
             Set<CartItem> cartItemSet = cartService.getCartItems(cart);
 
