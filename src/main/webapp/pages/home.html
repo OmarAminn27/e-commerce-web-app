@@ -124,7 +124,26 @@
     </div>
     <!-- Hero End -->
 
-    <div class="col-lg-9 m-auto">
+    <div class="col-lg-9 m-auto" style="position:relative">
+        <div id="filters" style="display:flex; top:0; right:0; position: absolute; margin-top: -20px; gap:10px">
+        <div id="sort" class="dropdown text-end">
+            <button id="sortBtn" class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                Sort By
+            </button>
+            <ul class="dropdown-menu">
+                <li><button class="dropdown-item" type="button" onclick="sortProducts('PLH',this)">Price: Low to
+                    High</button>
+                </li>
+                <li><button class="dropdown-item" type="button" onclick="sortProducts('PHL',this)">Price: High to
+                    Low</button>
+                </li>
+                <li><button class="dropdown-item" type="button" onclick="sortProducts('NAZ',this)">Name: A to Z</button>
+                </li>
+                <li><button class="dropdown-item" type="button" onclick="sortProducts('NZA',this)">Name: Z to A</button>
+                </li>
+            </ul>
+        </div>
         <div class="dropdown text-end" id="categories">
             <button id="categoriesBtn" class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Categories
@@ -136,6 +155,7 @@
                 <li><button class="dropdown-item" type="button" onclick="showCategory(this)">Herbs</button></li>
             </ul>
         </div>
+    </div>
 
         <div class="row g-4 justify-content-center" id="products">
             <!-- Products will be appended here -->
@@ -189,7 +209,6 @@
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
     <script src="js/home.js"></script>
-    <script src="js/cart.js"></script>
     <script src="js/logout.js"></script>
 </body>
 

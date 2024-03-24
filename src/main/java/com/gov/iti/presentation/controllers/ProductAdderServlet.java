@@ -42,7 +42,7 @@ public class ProductAdderServlet extends HttpServlet {
 //        System.out.println(jsonBody.toString());
 
         Product product = new Product();
-        product.setProductName(productDTO.getProductName());
+        product.setProductName(productDTO.getProductName().toUpperCase());
         product.setDescription(productDTO.getDescription());
         product.setCategory(productDTO.getCategory());
         product.setQuantity(productDTO.getQuantity());

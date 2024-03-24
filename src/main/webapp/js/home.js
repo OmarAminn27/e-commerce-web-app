@@ -58,6 +58,31 @@ function showCategory(item) {
     });
 }
 
+const sortBtn = document.getElementById('sortBtn');
+
+function sortProducts(sortType,item) {
+    console.log(sortType);
+    sortBtn.innerHTML = item.innerHTML;
+
+    productsDiv.innerHTML = '';
+
+    productDTOs.sort((a, b) => {
+        if (sortType === 'PLH') {
+            return a.price - b.price;
+        } else if (sortType === 'NAZ') {
+            return a.productName.localeCompare(b.productName);
+        } else if (sortType === 'NZA') {
+            return b.productName.localeCompare(a.productName);
+        } else if (sortType === 'PHL') {
+            return b.price - a.price;
+        }
+    }).forEach(productDTO => {
+        console.log(productDTO);
+        productsDiv.appendChild(createProduct(productDTO));
+    });
+}
+
+
 function createProduct(productDTO) {
     const productElement = document.createElement('div');
     productElement.classList.add('col-md-6', 'col-lg-6', 'col-xl-4');
