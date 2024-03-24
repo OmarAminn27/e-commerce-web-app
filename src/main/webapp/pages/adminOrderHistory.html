@@ -11,8 +11,9 @@
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Raleway:wght@600;800&display=swap"
-          rel="stylesheet">
+    <link
+            href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Raleway:wght@600;800&display=swap"
+            rel="stylesheet">
 
     <!-- Icon Font Stylesheet -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
@@ -40,46 +41,39 @@
 <!-- Spinner End -->
 
 
-
-
 <!-- Single Page Header start -->
 <div class="container-fluid page-header py-5">
     <h1 class="text-center text-white display-6">Admin</h1>
     <ol class="breadcrumb justify-content-center mb-0">
         <li class="breadcrumb-item"><a href="displayUsers">Review Users</a></li>
         <li class="breadcrumb-item"><a href="adminViewProducts">Manage Products</a></li>
-
     </ol>
 </div>
 <!-- Single Page Header End -->
 
-
-<!-- User Page Start -->
+<!-- Order History Page Start -->
 <div class="container-fluid py-5">
     <div class="container py-5">
         <div class="table-responsive">
-            <table class="table" id="user-table">
+            <h2 class="text-center mb-4">Order History</h2>
+            <table class="table" id="order-history-table">
                 <thead>
                 <tr>
-                    <th scope="col">Username</th>
-                    <!-- <th scope="col">Password</th> -->
-                    <th scope="col">Job</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Credit Limit</th>
-                    <th scope="col">Country</th>
-                    <th scope="col">City</th>
-                    <th scope="col">Street Name</th>
-                    <th scope="col">Interests</th>
+                    <th scope="col">Order ID</th>
+                    <th scope="col">User Name</th>
+                    <th scope="col">Ordered At</th>
+                    <th scope="col">Total Cost</th>
+                    <!-- Add more table headers as needed -->
                 </tr>
                 </thead>
                 <tbody>
-
+                <!-- Order history rows will be appended here -->
                 </tbody>
             </table>
         </div>
     </div>
 </div>
-<!-- User Page End -->
+<!-- Order History Page End -->
 
 
 <!-- Footer Start -->
@@ -123,13 +117,11 @@
 <script src="lib/waypoints/waypoints.min.js"></script>
 <script src="lib/lightbox/js/lightbox.min.js"></script>
 <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-<script>
 
-</script>
 <!-- Template Javascript -->
 <script src="js/main.js"></script>
-<script src="js/adminReviewUsers.js"></script>
 <script src="js/loadNavbar.js"></script>
+<script src="js/fetchOrderHistory.js"></script>
 </body>
 
 </html>

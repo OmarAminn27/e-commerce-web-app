@@ -30,4 +30,5 @@ public class OrderItem {
     @Column(name = "total_price", precision = 15, scale = 2)
     private Double totalPrice;
 
+
 }

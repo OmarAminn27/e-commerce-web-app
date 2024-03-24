@@ -302,7 +302,7 @@ public class Main {
         User user1 = new User();
         user1.setUsername("john_doe");
         user1.setBirthday(LocalDate.of(1990, 5, 15));
-        user1.setPassword(new BCryptPasswordEncoder().encode("password123"));
+        user1.setPassword(new BCryptPasswordEncoder().encode("123"));
         user1.setJob("Software Engineer");
         user1.setEmail("john.doe@example.com");
         user1.setCreditLimit(new BigDecimal("5000.00"));

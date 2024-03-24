@@ -1,5 +1,6 @@
 package com.gov.iti.persistence.daos;
 
+import com.gov.iti.business.entities.Order;
 import com.gov.iti.business.entities.User;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
@@ -30,5 +31,14 @@ public class UserDao extends AbstractDao<User> {
                 .setParameter("username", username)
                 .getResultList();
         return resultList.isEmpty() ? Optional.empty() : Optional.of(resultList.getFirst());
+    }
+
+    public List<Order> getOrdersByUserID(int userID, EntityManager entityManager) {
+        String jpql = "SELECT o FROM Order o WHERE o.user.id = :userID";
+
+        return entityManager.createQuery(jpql, Order.class)
+                .setParameter("userID", userID)
+                .getResultList();
+
     }
 }

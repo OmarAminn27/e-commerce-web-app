@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // Add event listener to the logout link
     document.getElementById("logoutBtn").addEventListener("click", function (event) {
         event.preventDefault();
         var xhr = new XMLHttpRequest();

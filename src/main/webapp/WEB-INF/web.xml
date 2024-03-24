@@ -2,6 +2,8 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd"
          version="5.0" metadata-complete="true">
+
+
     <listener>
         <listener-class>com.gov.iti.presentation.listeners.ContextListener</listener-class>
     </listener>
@@ -160,6 +162,51 @@
     <servlet-mapping>
         <servlet-name>LogoutServlet</servlet-name>
         <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>CheckoutServlet</servlet-name>
+        <servlet-class>com.gov.iti.presentation.controllers.CheckoutServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CheckoutServlet</servlet-name>
+        <url-pattern>/checkout</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>RegistrationDispatcher</servlet-name>
+        <servlet-class>com.gov.iti.presentation.controllers.RegistrationDispatcher</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RegistrationDispatcher</servlet-name>
+        <url-pattern>/register</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>OrderHistoryHelperServlet</servlet-name>
+        <servlet-class>com.gov.iti.presentation.controllers.OrderHistoryHelperServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>OrderHistoryHelperServlet</servlet-name>
+        <url-pattern>/addOrderHistoryUserToContext</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>OrderHistoryFetcherServlet</servlet-name>
+        <servlet-class>com.gov.iti.presentation.controllers.OrderHistoryFetcherServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>OrderHistoryFetcherServlet</servlet-name>
+        <url-pattern>/fetchOrderHistory</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>OrderHistoryDispatcher</servlet-name>
+        <servlet-class>com.gov.iti.presentation.controllers.OrderHistoryDispatcher</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>OrderHistoryDispatcher</servlet-name>
+        <url-pattern>/orderHistory</url-pattern>
     </servlet-mapping>
 
 </web-app>

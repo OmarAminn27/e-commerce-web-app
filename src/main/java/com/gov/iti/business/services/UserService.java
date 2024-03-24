@@ -1,5 +1,6 @@
 package com.gov.iti.business.services;
 
+import com.gov.iti.business.entities.Order;
 import com.gov.iti.business.entities.User;
 import com.gov.iti.persistence.daos.UserDao;
 import jakarta.persistence.EntityManager;
@@ -8,12 +9,12 @@ import jakarta.persistence.EntityTransaction;
 
 import java.util.List;
 
-public class UserProfileUpdaterService {
+public class UserService {
 
     private final EntityManagerFactory entityManagerFactory;
     private final UserDao userDao = UserDao.getInstance();
 
-    public UserProfileUpdaterService(EntityManagerFactory entityManagerFactory) {
+    public UserService(EntityManagerFactory entityManagerFactory) {
         this.entityManagerFactory = entityManagerFactory;
     }
 
@@ -42,5 +43,16 @@ public class UserProfileUpdaterService {
     public List<User> getAllUsers () {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         return userDao.findAll(entityManager);
+    }
+
+    public List<Order> getOrdersByUsername(String username) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        User user = userDao.findUserByName(username, entityManager).orElse(null);
+        assert user != null;
+        Integer userID = user.getId();
+        List<Order> orders = userDao.getOrdersByUserID(userID, entityManager);
+        entityManager.close();
+
+        return orders;
     }
 }

@@ -19,10 +19,10 @@ function updateUserProfiles() {
                 tableBody.innerHTML = '';
 
                 // Loop through the userDTOs and update the table
-                userDTOs.forEach(function(userDTO) {
+                userDTOs.forEach(function (userDTO) {
                     var newRow = '<tr>' +
                         '<td>' + userDTO.username + '</td>' +
-                        '<td>' + userDTO.password + '</td>' +
+                        // '<td>' + userDTO.password + '</td>' +
                         '<td>' + userDTO.job + '</td>' +
                         '<td>' + userDTO.email + '</td>' +
                         '<td>' + userDTO.creditLimit + '</td>' +
@@ -30,6 +30,7 @@ function updateUserProfiles() {
                         '<td>' + userDTO.city + '</td>' +
                         '<td>' + userDTO.streetName + '</td>' +
                         '<td>' + userDTO.interests + '</td>' +
+                        '<td><button class="btn btn-primary show-order-history-btn" onclick="showOrderHistory(\'' + userDTO.username + '\')">Order History</button></td>' +
                         '</tr>';
                     tableBody.innerHTML += newRow;
                 });
@@ -43,7 +44,27 @@ function updateUserProfiles() {
     xhr.send();
 }
 
+// Function to handle clicking on the "Show Order History" button
+function showOrderHistory(username) {
+    var xhr = new XMLHttpRequest();
+
+    xhr.open('POST', '/ecommerce/addOrderHistoryUserToContext', true);
+    xhr.setRequestHeader('Content-Type', 'text/plain');
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status >= 200 && xhr.status < 300) {
+                console.log('Helper servlet success');
+                window.location.href = "orderHistory";
+            } else {
+                console.error('Request failed');
+            }
+        }
+    };
+    xhr.send(username);
+}
+
+
 // Call the function when the page is loaded
-window.onload = function() {
+window.onload = function () {
     updateUserProfiles();
 };
