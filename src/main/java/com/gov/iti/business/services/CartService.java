@@ -40,7 +40,6 @@ public class CartService {
         EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();
 
-        entityManager.merge(cart);
         entityManager.merge(product);
 
         CartItemId cartItemId = new CartItemId();
@@ -56,9 +55,15 @@ public class CartService {
         cartItem.setTotalPrice(totalPrice);
         System.out.println("CartItem created successfully");
 
-        entityManager.merge(cartItem);
+        Set<CartItem> cartItems = cart.getCartItems();
 
-        cart.getCartItems().add(cartItem);
+        if (cartItems.contains(cartItem)){
+            cartItem.setQuantity(cartItem.getQuantity() + 1);
+        } else {
+            cart.getCartItems().add(cartItem);
+        }
+        entityManager.merge(cartItem);
+        entityManager.merge(cart);
 
         transaction.commit();
         entityManager.close();

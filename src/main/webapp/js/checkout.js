@@ -10,7 +10,7 @@ document.getElementById("checkoutBtn").addEventListener("click", function () {
                     console.log("Servlet activated successfully.");
                     var responseText = xhr.responseText; 
                     alert(responseText); 
-                    window.location.href = "/ecommerce/home";
+                    window.location.href = "home";
                 } else {
                     console.error("Failed to activate servlet. Status: " + xhr.status);
                 }
