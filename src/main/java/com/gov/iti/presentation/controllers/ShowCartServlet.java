@@ -7,6 +7,7 @@ import com.gov.iti.business.entities.Cart;
 import com.gov.iti.business.entities.CartItem;
 import com.gov.iti.business.entities.User;
 import com.gov.iti.business.services.CartService;
+import com.gov.iti.business.services.UserService;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.servlet.ServletException;
@@ -30,8 +31,9 @@ public class ShowCartServlet extends HttpServlet {
         HttpSession session = req.getSession(false);
         if (session != null){
             User loggedInUser = (User) session.getAttribute("user");
-            System.out.println(loggedInUser.getUsername());
-            Cart cart = loggedInUser.getCart();
+            User user = new UserService(emf).getUser(loggedInUser.getId());
+            System.out.println(user.getUsername());
+            Cart cart = user.getCart();
             Set<CartItem> cartItemSet = cartService.getCartItems(cart);
 
             // Convert CartItem entities to CartItemDto objects

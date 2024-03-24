@@ -5,6 +5,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gov.iti.business.entities.*;
 import com.gov.iti.business.services.CartService;
 import com.gov.iti.business.services.ProductsDisplayerService;
+import com.gov.iti.business.services.UserService;
+import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -40,15 +42,16 @@ public class AddToCartServlet extends HttpServlet {
         if (session !=null){
             User loggedInUser = (User) session.getAttribute("user");
             System.out.println("LoggedIn userId: " + loggedInUser.getId());
-            if (loggedInUser.getCart() == null){
+            User user = new UserService(emf).getUser(loggedInUser.getId());
+            if (user.getCart() == null){
                 Cart cart = new Cart();
-                cart.setUser(loggedInUser);
+                cart.setUser(user);
                 cartService.addCart(cart);
                 addCartItems(emf, cart, product, userQuantity, price);
             }
             else {
-                System.out.println("User already has cart "+ loggedInUser.getCart().getId());
-                addCartItems(emf, loggedInUser.getCart(), product, userQuantity, price);
+                System.out.println("User already has cart "+ user.getCart().getId());
+                addCartItems(emf, user.getCart(), product, userQuantity, price);
             }
         }else {
             //Manage this case
@@ -57,10 +60,10 @@ public class AddToCartServlet extends HttpServlet {
         }
     }
 
-//    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-////        resp.sendRedirect("/home");
-//        doPost(req, resp);
-//    }
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//        resp.sendRedirect("/home");
+        doPost(req, resp);
+    }
 
     private void addCartItems(EntityManagerFactory emf, Cart cart, Product product, int userQuantity, Double price){
         CartService cartService = new CartService(emf);

@@ -24,4 +24,12 @@ public class Cart {
     @OneToMany(mappedBy = "cart")
     private Set<CartItem> cartItems = new LinkedHashSet<>();
 
+    @Override
+    public String toString() {
+        return "Cart{" +
+                "id=" + id +
+                ", user=" + user +
+                ", cartItems=" + cartItems +
+                '}';
+    }
 }

@@ -59,7 +59,8 @@ public class ProductUpdaterService {
 
         Product productByName = productDao.getProductByName(productName, entityManager);
         System.out.println(productByName.getId());
-        entityManager.remove(productByName);
+        productDao.deleteById(entityManager, productByName.getId());
+//        entityManager.remove(productByName);
         System.out.println("Product deleted successfully.");
 
         // Azure Blob Storage Configuration

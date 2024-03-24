@@ -4,6 +4,7 @@ import com.gov.iti.business.entities.Cart;
 import com.gov.iti.business.entities.CartItem;
 import com.gov.iti.business.entities.User;
 import com.gov.iti.business.services.CheckoutService;
+import com.gov.iti.business.services.UserService;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.servlet.ServletException;
@@ -25,10 +26,11 @@ public class CheckoutServlet extends HttpServlet {
         System.out.println("User is: " + user.getUsername());
 
         EntityManagerFactory emf = (EntityManagerFactory) getServletContext().getAttribute("emf");
+        User user1 = new UserService(emf).getUser(user.getId());
         CheckoutService checkoutService = new CheckoutService(emf);
 
-        if (checkoutService.canAfford(user)){
-            checkoutService.checkout(user);
+        if (checkoutService.canAfford(user1)){
+            checkoutService.checkout(user1);
             resp.getWriter().write("Check out successful!");
         } else {
             resp.getWriter().write("You are poor!");
