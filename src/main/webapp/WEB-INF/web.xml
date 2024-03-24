@@ -182,4 +182,31 @@
         <url-pattern>/register</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>OrderHistoryHelperServlet</servlet-name>
+        <servlet-class>com.gov.iti.presentation.controllers.OrderHistoryHelperServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>OrderHistoryHelperServlet</servlet-name>
+        <url-pattern>/addOrderHistoryUserToContext</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>OrderHistoryFetcherServlet</servlet-name>
+        <servlet-class>com.gov.iti.presentation.controllers.OrderHistoryFetcherServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>OrderHistoryFetcherServlet</servlet-name>
+        <url-pattern>/fetchOrderHistory</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>OrderHistoryDispatcher</servlet-name>
+        <servlet-class>com.gov.iti.presentation.controllers.OrderHistoryDispatcher</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>OrderHistoryDispatcher</servlet-name>
+        <url-pattern>/orderHistory</url-pattern>
+    </servlet-mapping>
+
 </web-app>

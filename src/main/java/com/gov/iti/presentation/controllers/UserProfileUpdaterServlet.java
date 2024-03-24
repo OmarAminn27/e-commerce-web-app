@@ -1,14 +1,10 @@
 package com.gov.iti.presentation.controllers;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.gov.iti.business.dtos.ProductDTO;
 import com.gov.iti.business.dtos.UserDTO;
-import com.gov.iti.business.entities.Product;
 import com.gov.iti.business.entities.User;
-import com.gov.iti.business.services.ProductsDisplayerService;
-import com.gov.iti.business.services.UserProfileUpdaterService;
+import com.gov.iti.business.services.UserService;
 import com.gov.iti.business.utils.LocalDateTypeAdapter;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.servlet.ServletException;
@@ -17,18 +13,16 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 
 public class UserProfileUpdaterServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         EntityManagerFactory emf = (EntityManagerFactory) getServletContext().getAttribute("emf");
-        UserProfileUpdaterService userProfileUpdaterService = new UserProfileUpdaterService(emf);
-        List<User> allUsers = userProfileUpdaterService.getAllUsers();
+        UserService userService = new UserService(emf);
+        List<User> allUsers = userService.getAllUsers();
 
         List<UserDTO> userDTOs = new ArrayList<>();
         allUsers.forEach(user -> userDTOs.add(new UserDTO(user)));
