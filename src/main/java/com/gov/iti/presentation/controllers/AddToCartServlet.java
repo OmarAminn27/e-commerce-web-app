@@ -17,7 +17,7 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Set;
 
-//@WebServlet(urlPatterns = "/addToCart")
+@WebServlet(urlPatterns = "/addToCart")
 public class AddToCartServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("AddToCartServlet .doPost");

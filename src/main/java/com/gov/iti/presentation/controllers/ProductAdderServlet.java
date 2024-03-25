@@ -25,7 +25,7 @@ import java.io.OutputStream;
 import java.io.FileOutputStream;
 import java.util.Base64;
 
-//@WebServlet(urlPatterns = "/addProduct")
+@WebServlet(urlPatterns = "/addProduct")
 public class ProductAdderServlet extends HttpServlet {
 
     @Override

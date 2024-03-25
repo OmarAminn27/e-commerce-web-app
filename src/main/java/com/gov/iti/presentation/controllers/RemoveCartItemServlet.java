@@ -21,7 +21,7 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Optional;
 
-//@WebServlet(urlPatterns = "/removeCartItem")
+@WebServlet(urlPatterns = "/removeCartItem")
 public class RemoveCartItemServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("RemoveItemServlet .doPost");

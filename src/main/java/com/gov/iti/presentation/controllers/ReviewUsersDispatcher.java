@@ -8,7 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-//@WebServlet(urlPatterns = "/displayUsers")
+@WebServlet(urlPatterns = "/displayUsers")
 public class ReviewUsersDispatcher extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

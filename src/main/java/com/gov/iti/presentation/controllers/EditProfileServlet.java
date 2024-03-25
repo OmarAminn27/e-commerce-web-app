@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-//@WebServlet(urlPatterns = "/editProfile")
+@WebServlet(urlPatterns = "/editProfile")
 public class EditProfileServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("EditProfileServlet.doPost");

@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-//@WebServlet(urlPatterns = "/displayProducts")
+@WebServlet(urlPatterns = "/displayProducts")
 public class ProductsDisplayerServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
