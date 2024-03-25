@@ -75,6 +75,15 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>RemoveCartItemServlet</servlet-name>
+        <servlet-class>com.gov.iti.presentation.controllers.RemoveCartItemServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RemoveCartItemServlet</servlet-name>
+        <url-pattern>/removeCartItem</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>ProductsDisplayerServlet</servlet-name>
         <servlet-class>com.gov.iti.presentation.controllers.ProductsDisplayerServlet</servlet-class>
     </servlet>

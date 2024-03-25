@@ -29,11 +29,22 @@ document.addEventListener("DOMContentLoaded", function () {
                     var totalCell = document.createElement("td");
                     totalCell.textContent = item.totalPrice;
 
+                    // Create a remove button
+                    var removeButtonCell = document.createElement("td");
+                    var removeButton = document.createElement("button");
+                    removeButton.textContent = "Remove";
+                    removeButton.classList.add("btn", "btn-danger", "remove-btn"); // Add the specified classes
+                    removeButton.addEventListener("click", function (){
+                        removeItemFromCart(row, item.productDTO.id);
+                    });
+                    removeButtonCell.appendChild(removeButton);
+
                     // Append cells to the row
                     row.appendChild(productNameCell);
                     row.appendChild(quantityCell);
                     row.appendChild(priceCell);
                     row.appendChild(totalCell);
+                    row.appendChild(removeButtonCell); // Append the remove button cell to the row
 
                     // Append the row to the tbody
                     tbody.appendChild(row);
@@ -45,3 +56,20 @@ document.addEventListener("DOMContentLoaded", function () {
     };
     xhr.send();
 });
+
+function removeItemFromCart(row, itemId){
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "removeCartItem", true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.onreadystatechange = function (){
+        if (xhr.readyState === 4){
+            if (xhr.status === 200){
+                console.log("showCart.js -> Cart Item sent for removal");
+            }
+        }
+    }
+    row.remove();
+    xhr.send(JSON.stringify({
+        itemId: itemId
+    }));
+}

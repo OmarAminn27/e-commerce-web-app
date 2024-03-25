@@ -67,19 +67,17 @@ public class AddToCartServlet extends HttpServlet {
 
     private void addCartItems(EntityManagerFactory emf, Cart cart, Product product, int userQuantity, Double price){
         CartService cartService = new CartService(emf);
-        cartService.addCartItemToCart(cart, product, userQuantity, price);
-        System.out.println("AddToCartServlet : Cart items added");
-//        boolean cartContainsProduct =
-//                cart.getCartItems()
-//                        .stream()
-//                        .anyMatch(cartItem -> cartItem.getProduct().getId().equals(product.getId()));
-//        System.out.println(cartContainsProduct);
-//        if (cartContainsProduct){
-//            cartService.updateCartItem(cart, product, userQuantity, price);
-//            System.out.println("UpdateItemUpdated : Cart items updated");
-//        }else{
-//            cartService.addCartItemToCart(cart, product, userQuantity, price);
-//            System.out.println("AddToCartServlet : Cart items added");
-//        }
+        boolean cartContainsProduct =
+                cart.getCartItems()
+                        .stream()
+                        .anyMatch(cartItem -> cartItem.getProduct().getId().equals(product.getId()));
+        System.out.println(cartContainsProduct);
+        if (cartContainsProduct){
+            cartService.updateCartItem(cart, product, userQuantity, price);
+            System.out.println("UpdateItemUpdated : Cart item quantity updated");
+        }else{
+            cartService.addCartItemToCart(cart, product, userQuantity, price);
+            System.out.println("AddToCartServlet : Cart items added");
+        }
     }
 }
