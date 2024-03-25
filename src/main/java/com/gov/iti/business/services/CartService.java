@@ -9,6 +9,8 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
 
+import java.math.BigDecimal;
+import java.util.Optional;
 import java.util.Set;
 
 
@@ -55,13 +57,8 @@ public class CartService {
         cartItem.setTotalPrice(totalPrice);
         System.out.println("CartItem created successfully");
 
-        Set<CartItem> cartItems = cart.getCartItems();
+        cart.getCartItems().add(cartItem);
 
-        if (cartItems.contains(cartItem)){
-            cartItem.setQuantity(cartItem.getQuantity() + 1);
-        } else {
-            cart.getCartItems().add(cartItem);
-        }
         entityManager.merge(cartItem);
         entityManager.merge(cart);
 
@@ -70,11 +67,49 @@ public class CartService {
     }
 
 
-    public Set<CartItem> getCartItems(Cart cart){
-        return cart.getCartItems();
+    public void updateCartItem(Cart cart, Product product, Integer userQuantity, Double price){
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        EntityTransaction transaction = entityManager.getTransaction();
+        transaction.begin();
+
+        entityManager.merge(product);
+
+        CartItemId cartItemId = new CartItemId();
+        cartItemId.setCartId(cart.getId());
+        cartItemId.setProductId(product.getId());
+
+        CartItem cartItem = entityManager.find(CartItem.class, cartItemId);
+        cartItem.setQuantity(cartItem.getQuantity() + userQuantity);
+        cartItem.setTotalPrice(cartItem.getTotalPrice() + price);
+
+        entityManager.merge(cartItem);
+        transaction.commit();
+        entityManager.close();
     }
 
-    public void updateCartItem(Cart cart, Product product, Integer userQuantity, Double price){
-        System.out.println("Product " + product.getProductName() + " already exists in cart");
+    public void removeCartItem(Cart cart, Product product){
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        EntityTransaction transaction = entityManager.getTransaction();
+        transaction.begin();
+
+        CartItemId cartItemId = new CartItemId();
+        cartItemId.setCartId(cart.getId());
+        cartItemId.setProductId(product.getId());
+
+        CartItem cartItem = entityManager.find(CartItem.class, cartItemId);
+
+        if (cartItem != null) {
+            cart.getCartItems().remove(cartItem);
+            entityManager.remove(cartItem);
+        }
+
+        transaction.commit();
+        entityManager.close();
+    }
+
+
+
+    public Set<CartItem> getCartItems(Cart cart){
+        return cart.getCartItems();
     }
 }
