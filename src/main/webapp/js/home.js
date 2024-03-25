@@ -1,6 +1,55 @@
 let productDTOs;
 const productsDiv = document.getElementById('products');
 
+class Pagination {
+    constructor(itemsPerPage, items) {
+        this.itemsPerPage = itemsPerPage;
+        this.items = items;
+        this.currentPage = 1;
+    }
+
+    getCurrentPageItems() {
+        console.log(this.currentPage);
+        if (!this.items) {
+            return this.items;
+        }
+        const start = (this.currentPage - 1) * this.itemsPerPage;
+        const end = this.currentPage * this.itemsPerPage;
+        return this.items.slice(start, end);
+    }
+
+    onNextPage() {
+        console.log(this.currentPage);
+        if (!this.items || this.currentPage * this.itemsPerPage >= this.items.length) {
+            return [];
+        }
+        this.currentPage++;
+        return this.getCurrentPageItems();
+    }
+
+    onPreviousPage() {
+        console.log(this.currentPage);
+        if (this.currentPage <= 1) {
+            return [];
+        }
+        this.currentPage--;
+        return this.getCurrentPageItems();
+    }
+
+    isFirstPage() {
+        return this.currentPage === 1;
+    }
+
+    isLastPage() {
+        return this.currentPage * this.itemsPerPage >= this.items.length;
+    }
+}
+
+
+const itemsPerPage = 12;
+let pagination;
+
+
 window.onload = function () {
     console.log("reached home js");
     const xhr = new XMLHttpRequest();
@@ -14,7 +63,12 @@ window.onload = function () {
                 try {
                     productDTOs = JSON.parse(xhr.responseText);
 
-                    productDTOs.forEach(productDTO => {
+                    pagination = new Pagination(itemsPerPage, productDTOs);
+
+                    const currentPageItems = pagination.getCurrentPageItems();
+                    
+                    currentPageItems.forEach(productDTO => {
+                        console.log(productDTO);
                         productsDiv.appendChild(createProduct(productDTO));
                     });
                 } catch (error) {
@@ -32,6 +86,38 @@ window.onload = function () {
     xhr.send();
 };
 
+const nextButton = document.getElementById('nextBtn');
+const previousButton = document.getElementById('previousBtn');
+
+nextButton.addEventListener('click', (event) => {
+    console.log('next button clicked');
+    if (pagination.isLastPage()) {
+        event.preventDefault(); // prevent the default action
+    } else {
+        const nextPageItems = pagination.onNextPage();
+        
+        productsDiv.innerHTML = '';
+
+        nextPageItems.forEach(productDTO => {
+            productsDiv.appendChild(createProduct(productDTO));
+        });
+    }
+});
+
+previousButton.addEventListener('click', (event) => {
+    console.log('previous button clicked');
+    if (pagination.isFirstPage()) {
+        event.preventDefault();
+    } else {
+        const previousPageItems = pagination.onPreviousPage();
+
+        productsDiv.innerHTML = '';
+
+    previousPageItems.forEach(productDTO => {
+        productsDiv.appendChild(createProduct(productDTO));
+    });
+    }
+});
 
 
 // Function to convert byte array to base64
@@ -44,7 +130,7 @@ function arrayBufferToBase64(buffer) {
     }
     return btoa(binary);
 }
-
+let counter=0;
 const categoriesBtn = document.getElementById('categoriesBtn');
 function showCategory(item) {
     categoriesBtn.innerHTML = item.innerHTML;

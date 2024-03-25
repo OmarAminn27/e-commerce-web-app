@@ -453,7 +453,8 @@
 
 /*** Single Page Start ***/
 .pagination {
-    display: inline-block;
+    display: flex;
+    flex-direction: row;
 }
   
 .pagination a {
@@ -560,4 +561,14 @@
 
 .error {
     border-color: red !important;
+}
+
+.center-div {
+    display: flex;
+    justify-content: center;
+}
+
+.pages {
+    display: flex;
+    justify-content: center;
 }
