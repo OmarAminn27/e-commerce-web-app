@@ -73,4 +73,21 @@ public class User {
         this.streetName = streetName;
         this.interests = interests;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", birthday=" + birthday +
+                ", password='" + password + '\'' +
+                ", job='" + job + '\'' +
+                ", email='" + email + '\'' +
+                ", creditLimit=" + creditLimit +
+                ", country='" + country + '\'' +
+                ", city='" + city + '\'' +
+                ", streetName='" + streetName + '\'' +
+                ", interests='" + interests + '\'' +
+                '}';
+    }
 }
