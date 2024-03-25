@@ -5,6 +5,7 @@ import com.gov.iti.business.services.LoginService;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -12,6 +13,7 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
+@WebServlet(urlPatterns = "/login")
 public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -45,7 +47,7 @@ public class LoginServlet extends HttpServlet {
         HttpSession session = req.getSession(false);
         if (session == null) {
             System.out.println("doGet, user is null");
-            RequestDispatcher dispatcher = req.getRequestDispatcher("/pages/login.html");
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/pages/login.html");
             dispatcher.forward(req, resp);
         } else {
             System.out.println("doGet, user not null");

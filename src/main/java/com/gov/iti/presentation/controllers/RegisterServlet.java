@@ -4,6 +4,7 @@ import com.gov.iti.business.entities.User;
 import com.gov.iti.business.services.RegisterService;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -14,6 +15,7 @@ import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+@WebServlet(urlPatterns = "/RegisterServlet")
 public class RegisterServlet extends HttpServlet {
 
     @Override

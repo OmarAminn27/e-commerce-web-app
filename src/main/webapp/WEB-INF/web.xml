@@ -100,7 +100,7 @@
         <servlet-name>HomeServlet</servlet-name>
         <url-pattern>/home</url-pattern>
     </servlet-mapping>
- 
+
     <servlet>
         <servlet-name>RegisterServlet</servlet-name>
         <servlet-class>com.gov.iti.presentation.controllers.RegisterServlet</servlet-class>

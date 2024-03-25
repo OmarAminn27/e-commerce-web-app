@@ -9,6 +9,7 @@ import com.gov.iti.business.utils.ByteArrayToBase64TypeAdapter;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -24,6 +25,7 @@ import java.io.OutputStream;
 import java.io.FileOutputStream;
 import java.util.Base64;
 
+@WebServlet(urlPatterns = "/addProduct")
 public class ProductAdderServlet extends HttpServlet {
 
     @Override

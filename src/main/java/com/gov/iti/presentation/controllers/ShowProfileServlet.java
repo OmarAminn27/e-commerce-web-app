@@ -8,6 +8,7 @@ import com.gov.iti.business.services.ProfileService;
 import com.gov.iti.business.utils.LocalDateTypeAdapter;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -16,6 +17,7 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.time.LocalDate;
 
+@WebServlet(urlPatterns = "/showProfile")
 public class ShowProfileServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

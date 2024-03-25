@@ -9,6 +9,7 @@ import com.gov.iti.business.services.UserService;
 import com.gov.iti.business.utils.LocalDateTypeAdapter;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -17,6 +18,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
+@WebServlet(urlPatterns = "/fetchOrderHistory")
 public class OrderHistoryFetcherServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

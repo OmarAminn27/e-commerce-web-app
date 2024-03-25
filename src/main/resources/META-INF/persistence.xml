@@ -17,12 +17,12 @@
 
         <properties>
             <property name="javax.persistence.jdbc.url"
-                      value="jdbc:mysql://database-2.cr0w4uy0qk8f.eu-north-1.rds.amazonaws.com:3306/ecommerce"/>
+                      value="jdbc:mysql://localhost:3306/ecommerce"/>
 <!--            <property name="hibernate.dialect"-->
 <!--                      value="org.hibernate.dialect.MySQLDialect" />-->
             <property name="javax.persistence.jdbc.driver"
                       value="com.mysql.cj.jdbc.Driver"/>
-            <property name="javax.persistence.jdbc.user" value="admin"/>
+            <property name="javax.persistence.jdbc.user" value="root"/>
             <property name="javax.persistence.jdbc.password" value="password"/>
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.format_sql" value="true"/>

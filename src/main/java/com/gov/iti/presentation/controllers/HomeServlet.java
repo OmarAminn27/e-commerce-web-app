@@ -8,6 +8,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -15,13 +16,14 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
+@WebServlet(urlPatterns = "/home")
 public class HomeServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("HomeServlet.doPost");
         HttpSession session = req.getSession(false);
         if (session != null) {
             System.out.println("session is not null");
-            req.getRequestDispatcher("/pages/home.html").forward(req,resp);
+            req.getRequestDispatcher("/WEB-INF/pages/home.html").forward(req,resp);
         } else {
             System.out.println("session is null");
             req.getRequestDispatcher("/login").forward(req,resp);

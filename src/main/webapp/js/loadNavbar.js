@@ -1,5 +1,5 @@
 function prependHeaderToBody() {
-    fetch('pages/navbar.html')
+    fetch('navbar.html')
         .then(response => response.text())
         .then(headerHtml => {
             document.body.insertAdjacentHTML('afterbegin', headerHtml);
