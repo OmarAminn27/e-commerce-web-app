@@ -1,7 +1,7 @@
 package com.gov.iti.presentation.controllers;
 
 import com.gov.iti.business.entities.User;
-import com.gov.iti.persistence.daos.UserDao;
+import com.gov.iti.business.services.RegisterService;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -12,33 +12,31 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
-import java.sql.Date;
 import java.time.LocalDate;
-import java.util.Optional;
 
 public class RegisterServlet extends HttpServlet {
 
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("-----------------------");
         System.out.println("RegisterServlet.doPost");
 
         EntityManagerFactory emf = (EntityManagerFactory) req.getServletContext().getAttribute("emf");
-        UserDao userDao = UserDao.getInstance();
+
+        RegisterService registerService = new RegisterService(emf);
+//        UserDao userDao = UserDao.getInstance();
 
         String type = req.getParameter("type");
         System.out.println("type = " + type);
 
         switch (type) {
-            case "username" -> checkUsername(req, resp, emf, userDao);
-            case "email" -> checkEmail(req, resp, emf, userDao);
-            case null -> registerUser(req, resp, emf, userDao);
+            case "username" -> checkUsername(req, resp, emf, registerService);
+            case "email" -> checkEmail(req, resp, emf, registerService);
+            case null -> registerUser(req, resp, emf, registerService);
             default -> throw new IllegalStateException("Unexpected value: " + type);
         }
     }
 
-    private void registerUser(HttpServletRequest req, HttpServletResponse resp, EntityManagerFactory emf, UserDao userDao) {
+    private void registerUser(HttpServletRequest req, HttpServletResponse resp, EntityManagerFactory emf, RegisterService registerService) {
         System.out.println("RegisterServlet.registerUser");
 
         String username = req.getParameter("name");
@@ -56,45 +54,54 @@ public class RegisterServlet extends HttpServlet {
 
 
         User user = new User(username, email, new BCryptPasswordEncoder().encode(password), birthDate, job, credit, country, city, street, interests);
-        userDao.create(emf.createEntityManager(), user);
-
+//        userDao.create(emf.createEntityManager(), user);
+        registerService.registerUser(user);
+        System.out.println("userRegistered");
         try {
-            resp.sendRedirect("login");
+            resp.sendRedirect("login");  // need to be updated
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private void checkEmail(HttpServletRequest req, HttpServletResponse resp, EntityManagerFactory emf, UserDao userDao) {
+    private void checkEmail(HttpServletRequest req, HttpServletResponse resp, EntityManagerFactory emf, RegisterService registerService) {
         System.out.println("RegisterServlet.checkEmail");
         String email = req.getParameter("email");
-        Optional<User> user = userDao.findByEmail(email, emf.createEntityManager());
+//        Optional<User> user = userDao.findByEmail(email, emf.createEntityManager());
+        boolean isUnique = registerService.checkEmail(email);
+
         PrintWriter out = null;
         try {
             out = resp.getWriter();
             resp.setContentType("text/plain");
-            if (user.isEmpty()) {
+            if (isUnique) {
                 out.write("unique");
+                System.out.println("unique");
             } else {
                 out.write("taken");
+                System.out.println("taken");
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private void checkUsername(HttpServletRequest req, HttpServletResponse resp, EntityManagerFactory emf, UserDao userDao) {
+    private void checkUsername(HttpServletRequest req, HttpServletResponse resp, EntityManagerFactory emf, RegisterService registerService) {
         System.out.println("RegisterServlet.checkUsername");
         String username = req.getParameter("username");
-        Optional<User> user = userDao.findUserByName(username, emf.createEntityManager());
+
+        boolean isUnique = registerService.checkUsername(username);
+
         PrintWriter out = null;
         try {
             out = resp.getWriter();
             resp.setContentType("text/plain");
-            if (user.isEmpty()) {
+            if (isUnique) {
                 out.write("unique");
+                System.out.println("unique");
             } else {
                 out.write("taken");
+                System.out.println("taken");
             }
         } catch (IOException e) {
             e.printStackTrace();

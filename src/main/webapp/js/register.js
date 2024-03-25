@@ -54,6 +54,16 @@ birthDate.addEventListener("focus", function () {
     birthDate.title = "";
 });
 
+//document.querySelector('form').addEventListener('submit', function(event) {
+//    var email = document.getElementById('email').value;
+//    var emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+//
+//    if (!email.match(emailPattern)) {
+//        event.preventDefault();
+//        alert('Please enter a valid email address.');
+//    }
+//});
+
 
 // Birthdate
 password.addEventListener("blur", function () {

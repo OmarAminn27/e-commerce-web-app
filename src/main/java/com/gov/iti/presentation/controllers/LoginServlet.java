@@ -34,7 +34,7 @@ public class LoginServlet extends HttpServlet {
                 resp.sendRedirect(req.getContextPath() + "/home");
             }
         } else {
-            RequestDispatcher dispatcher = req.getRequestDispatcher("/pages/login.html");
+            RequestDispatcher dispatcher = req.getRequestDispatcher("login");
             dispatcher.forward(req, resp);
         }
     }
