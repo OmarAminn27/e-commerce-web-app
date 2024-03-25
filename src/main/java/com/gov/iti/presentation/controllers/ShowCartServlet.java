@@ -54,9 +54,6 @@ public class ShowCartServlet extends HttpServlet {
             resp.setCharacterEncoding("UTF-8");
 
             resp.getWriter().print(json);
-//
-//            cartItemDtoList.stream()
-//                    .forEach(System.out::println);
         }
     }
 
