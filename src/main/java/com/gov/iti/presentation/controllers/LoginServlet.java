@@ -25,6 +25,7 @@ public class LoginServlet extends HttpServlet {
         String password = req.getParameter("password");
 
         User user = loginService.findUserByEmail(email);
+        System.out.println("user: " + user);
 
         if (user != null) {
             boolean passwordMatches = loginService.passwordMatches(user, password);
@@ -34,8 +35,11 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute("user", user);
                 System.out.println("dispatching to home");
                 resp.sendRedirect(req.getContextPath() + "/home");
+            }else {
+                System.out.println( "the password does not match1");
             }
         } else {
+            System.out.println( "the password does not match2");
             RequestDispatcher dispatcher = req.getRequestDispatcher("login");
             dispatcher.forward(req, resp);
         }
