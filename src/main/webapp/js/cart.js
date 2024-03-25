@@ -1,7 +1,9 @@
 function addToCart(id, productName, price, productQuantity, userQuantity) {
-    console.log("Product ID:", id);
-    console.log("Product Name:", productName);
-    console.log("Product Price:", price);
+    // console.log("Product ID:", id);
+    // console.log("Product Name:", productName);
+    // console.log("Product Price:", price);
+    productQuantity = parseInt(productQuantity);
+    userQuantity = parseInt(userQuantity);
     console.log("Product Quantity:", productQuantity);
     console.log("User Quantity:", userQuantity);
 

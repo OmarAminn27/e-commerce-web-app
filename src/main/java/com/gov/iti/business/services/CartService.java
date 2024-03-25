@@ -87,6 +87,26 @@ public class CartService {
         entityManager.close();
     }
 
+    public void updateCartItemFromCart(Cart cart, Product product, Integer userQuantity){
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        EntityTransaction transaction = entityManager.getTransaction();
+        transaction.begin();
+
+        entityManager.merge(product);
+
+        CartItemId cartItemId = new CartItemId();
+        cartItemId.setCartId(cart.getId());
+        cartItemId.setProductId(product.getId());
+
+        CartItem cartItem = entityManager.find(CartItem.class, cartItemId);
+        cartItem.setQuantity(userQuantity);
+        cartItem.setTotalPrice(product.getPrice().doubleValue()* userQuantity);
+
+        entityManager.merge(cartItem);
+        transaction.commit();
+        entityManager.close();
+    }
+
     public void removeCartItem(Cart cart, Product product){
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
