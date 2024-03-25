@@ -16,7 +16,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
 
-@WebServlet(urlPatterns = "/updateProduct")
+//@WebServlet(urlPatterns = "/updateProduct")
 public class ProductUpdaterServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

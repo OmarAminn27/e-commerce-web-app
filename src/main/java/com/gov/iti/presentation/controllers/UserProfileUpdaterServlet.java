@@ -18,7 +18,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet(urlPatterns = "/updateUserProfile")
+//@WebServlet(urlPatterns = "/updateUserProfile")
 public class UserProfileUpdaterServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
-@WebServlet(urlPatterns = "/fetchOrderHistory")
+//@WebServlet(urlPatterns = "/fetchOrderHistory")
 public class OrderHistoryFetcherServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

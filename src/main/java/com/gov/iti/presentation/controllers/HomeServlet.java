@@ -16,7 +16,7 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-@WebServlet(urlPatterns = "/home")
+//@WebServlet(urlPatterns = "/home")
 public class HomeServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("HomeServlet.doPost");

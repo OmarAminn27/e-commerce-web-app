@@ -15,7 +15,7 @@ import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-@WebServlet(urlPatterns = "/RegisterServlet")
+//@WebServlet(urlPatterns = "/RegisterServlet")
 public class RegisterServlet extends HttpServlet {
 
     @Override
