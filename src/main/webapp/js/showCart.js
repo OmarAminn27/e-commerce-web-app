@@ -19,37 +19,40 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     // Create table cells for each field
                     var productNameCell = document.createElement("td");
-                    productNameCell.textContent = item.productDTO.productName;
-
                     var quantityCell = document.createElement("td");
                     var quantityInput = document.createElement("input");
-                    quantityInput.setAttribute("id", "cartItemQuantity"+productNameCell.textContent);
+                    var totalCell = document.createElement("td");
+                    var priceCell = document.createElement("td");
+                    var quantityAdjustCell = document.createElement("td");
+                    var totalCostElement = document.getElementById("totalCost");
+
+                    productNameCell.textContent = item.productDTO.productName;
+
+                    quantityInput.setAttribute("id", "cartItemQuantity" + productNameCell.textContent);
                     quantityInput.type = "number";
                     quantityInput.value = item.quantity;
-
                     // if(item.quantity < item.productDTO.quantity){
                     //     quantityInput.value = item.quantity;
                     // }else{
+
                     //     quantityInput.value = item.productDTO.quantity;
                     //     alert("Maximum quantity of " + item.productDTO.productName +"S to buy is " + item.productDTO.quantity);
                     // }
-
                     quantityInput.min = "1";
+
                     quantityInput.max = item.productDTO.quantity;
                     quantityInput.classList.add("quantity-input");
+
                     quantityCell.appendChild(quantityInput);
-
-                    var priceCell = document.createElement("td");
                     priceCell.textContent = item.productDTO.price;
+                    totalCell.setAttribute("id", item.productDTO.productName.toLowerCase() + "Price");
 
-                    var totalCell = document.createElement("td");
                     totalCell.textContent = item.totalPrice;
-
                     // Update totalCost
-                    totalCost += parseFloat(item.totalPrice);
 
+
+                    totalCost += parseFloat(item.totalPrice);
                     // Create buttons for adjusting quantity
-                    var quantityAdjustCell = document.createElement("td");
 
                     // Increment item
                     var plusButton = document.createElement("button");
@@ -61,6 +64,8 @@ document.addEventListener("DOMContentLoaded", function () {
                         item.quantity = quantityInput.value;
                         updateItemQuantity(item);
                         updateTotalCost(); // Update total cost when quantity changes
+                        totalCost+= parseFloat(priceCell.textContent);
+                        totalCostElement.textContent = "Total Cost: $" + totalCost.toFixed(2);
                     });
 
                     // Decrement item
@@ -74,6 +79,8 @@ document.addEventListener("DOMContentLoaded", function () {
                             item.quantity = quantityInput.value;
                             updateItemQuantity(item);
                             updateTotalCost(); // Update total cost when quantity changes
+                            totalCost-= parseFloat(priceCell.textContent);
+                            totalCostElement.textContent = "Total Cost: $" + totalCost.toFixed(2);
                         }
                     });
                     quantityAdjustCell.appendChild(minusButton);
@@ -87,8 +94,10 @@ document.addEventListener("DOMContentLoaded", function () {
                     removeButton.classList.add("btn", "btn-danger", "remove-btn"); // Add the specified classes
                     removeButton.addEventListener("click", function () {
                         removeItemFromCart(row, item.productDTO.id);
-                        updateItemQuantity(quantityInput.value);
+                        updateItemQuantity(item);
                         updateTotalCost(); // Update total cost when item is removed
+                        totalCost-= parseFloat(priceCell.textContent) * parseFloat(quantityInput.textContent);
+                        totalCostElement.textContent = "Total Cost: $" + totalCost.toFixed(2);
                     });
                     removeButtonCell.appendChild(removeButton);
 
@@ -108,7 +117,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     totalCostElement.textContent = "Total Cost: $" + totalCost.toFixed(2);
                 }
 
-                updateTotalCost(); // Call updateTotalCost to initially display total cost
+                updateTotalCost();
             } else {
                 console.error("Error fetching user data");
             }
@@ -118,13 +127,13 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
-function removeItemFromCart(row, itemId){
+function removeItemFromCart(row, itemId) {
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "removeCartItem", true);
     xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.onreadystatechange = function (){
-        if (xhr.readyState === 4){
-            if (xhr.status === 200){
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
                 console.log("showCart.js -> Cart Item sent for removal");
             }
         }
@@ -136,12 +145,12 @@ function removeItemFromCart(row, itemId){
 }
 
 
-function updateItemQuantity(item){
+function updateItemQuantity(item) {
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "updateCartItem", true);
     xhr.setRequestHeader("Content-Type", "application/json");
     console.log(item.quantity);
-    console.log(item.productDTO.productName);
+    // console.log(item.productDTO.productName);
     console.log(item.productDTO.price);
     console.log(item.productDTO.id);
     console.log(item.cartId);
@@ -157,7 +166,7 @@ function updateItemQuantity(item){
         if (xhr.readyState === 4) {
             if (xhr.status === 200) {
                 console.log("showCart.js -> item quantity: updates sent successfully");
-            }else {
+            } else {
                 console.error("showCart.js -> Error send item quantity updates");
             }
         }
@@ -167,5 +176,9 @@ function updateItemQuantity(item){
         cartId: item.cartId,
         totalPrice: item.productDTO.price,
         userQuantity: item.quantity
-    }))
+    }));
+    console.log(item.productDTO.price * item.quantity);
+
+    const itemTotalPrice = document.getElementById(item.productDTO.productName.toLowerCase() + "Price");
+    itemTotalPrice.textContent = item.productDTO.price * item.quantity;
 }
