@@ -11,7 +11,8 @@ import java.io.IOException;
 @WebServlet(urlPatterns = "/profile")
 public class ProfileServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-            req.getRequestDispatcher("/WEB-INF/pages/user-profile.html").forward(req,resp);
+        System.out.println("ProfileServlet.doPost");
+        req.getRequestDispatcher("/WEB-INF/pages/user-profile.html").forward(req,resp);
     }
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
