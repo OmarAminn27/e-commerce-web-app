@@ -89,6 +89,8 @@ window.onload = function () {
 const nextButton = document.getElementById('nextBtn');
 const previousButton = document.getElementById('previousBtn');
 
+const pageNumberElement = document.getElementById('pageNumber');
+
 nextButton.addEventListener('click', (event) => {
     console.log('next button clicked');
     if (pagination.isLastPage()) {
@@ -101,6 +103,7 @@ nextButton.addEventListener('click', (event) => {
         nextPageItems.forEach(productDTO => {
             productsDiv.appendChild(createProduct(productDTO));
         });
+        pageNumberElement.innerText = pagination.currentPage;
     }
 });
 
@@ -116,6 +119,7 @@ previousButton.addEventListener('click', (event) => {
     previousPageItems.forEach(productDTO => {
         productsDiv.appendChild(createProduct(productDTO));
     });
+    pageNumberElement.innerText = pagination.currentPage;
     }
 });
 
