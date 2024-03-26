@@ -19,6 +19,7 @@ public class ProfileService {
     }
 
     public void updateUser(User user){
+        System.out.println("ProfileService.updateUser");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
         try{
