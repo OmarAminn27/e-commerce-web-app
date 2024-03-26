@@ -2,6 +2,7 @@ package com.gov.iti.business.services;
 
 import com.gov.iti.business.entities.*;
 import com.gov.iti.persistence.daos.CartDao;
+import com.gov.iti.persistence.daos.ProductDao;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
@@ -9,6 +10,7 @@ import jakarta.persistence.EntityTransaction;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -16,6 +18,7 @@ public class CheckoutService {
 
     private final EntityManagerFactory entityManagerFactory;
     private final CartDao cartDao = CartDao.getInstance();
+    private final ProductDao productDao = ProductDao.getInstance();
 
     public CheckoutService(EntityManagerFactory entityManagerFactory) {
         this.entityManagerFactory = entityManagerFactory;
@@ -71,18 +74,18 @@ public class CheckoutService {
         transaction.commit();
     }
 
-    private void emptyCart (EntityManager entityManager, int cartID) {
+    private void emptyCart(EntityManager entityManager, int cartID) {
         String jpql = "DELETE FROM CartItem ci WHERE ci.cart.id = :cartId";
         entityManager.createQuery(jpql)
                 .setParameter("cartId", cartID)
                 .executeUpdate();
     }
 
-    private void deductFromCredit (User user, BigDecimal cartTotal) {
+    private void deductFromCredit(User user, BigDecimal cartTotal) {
         user.setCreditLimit(user.getCreditLimit().subtract(cartTotal));
     }
 
-    public boolean canAfford (User user) {
+    public boolean canAfford(User user) {
         BigDecimal cartTotal = BigDecimal.valueOf(user.getCart()
                 .getCartItems()
                 .stream()
@@ -92,5 +95,27 @@ public class CheckoutService {
         BigDecimal creditLimit = user.getCreditLimit();
 
         return creditLimit.compareTo(cartTotal) >= 0;
+    }
+
+    public boolean hasEnoughQuantity(User user) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+
+        List<Integer> idList = user.getCart().getCartItems().stream().map(cartItem -> cartItem.getProduct().getId()).toList();
+        List<Product> productList = idList.stream().map(id -> productDao.findOneById(id, entityManager).orElse(null)).toList();
+
+        for (Product productFromDB : productList) {
+
+            Integer productQuantityFromCart = user.getCart()
+                    .getCartItems().stream()
+                    .filter(cartItem -> cartItem.getProduct().getProductName().equals(productFromDB.getProductName()))
+                    .findFirst()
+                    .map(CartItem::getQuantity)
+                    .orElse(0);
+
+            if (productFromDB.getQuantity() < productQuantityFromCart) {
+                return false;
+            }
+        }
+        return true;
     }
 }

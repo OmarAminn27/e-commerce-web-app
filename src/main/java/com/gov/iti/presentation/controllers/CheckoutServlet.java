@@ -32,11 +32,14 @@ public class CheckoutServlet extends HttpServlet {
         CheckoutService checkoutService = new CheckoutService(emf);
 
         if (checkoutService.canAfford(user1)){
-            checkoutService.checkout(user1);
-            resp.getWriter().write("Check out successful!");
+            if (checkoutService.hasEnoughQuantity(user)) {
+                checkoutService.checkout(user1);
+                resp.getWriter().write("Check out successful!");
+            } else {
+                resp.getWriter().write("Sorry, the requested quantity for some products is not available at the moment. Please adjust your quantities and try again.");
+            }
         } else {
-            resp.getWriter().write("You are poor!");
+            resp.getWriter().write("Insufficient funds to complete the purchase. Please adjust your cart.");
         }
-
     }
 }
