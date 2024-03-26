@@ -127,8 +127,6 @@ public class CartService {
         entityManager.close();
     }
 
-
-
     public Set<CartItem> getCartItems(Cart cart){
         return cart.getCartItems();
     }

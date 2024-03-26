@@ -172,7 +172,6 @@ function sortProducts(sortType,item) {
     });
 }
 
-
 function createProduct(productDTO) {
     const productElement = document.createElement('div');
     productElement.classList.add('col-md-6', 'col-lg-6', 'col-xl-4');
@@ -193,20 +192,37 @@ function createProduct(productDTO) {
                                 <p class="text-dark fs-5 fw-bold mb-0">$${productDTO.price} / kg</p>
                             </div>
                         </div>
-                                
                     </div>
                 </div>
                 <div class="d-flex align-items-center mb-3">
-                                            <label for="quantity-${productDTO.id}" class="me-2">Quantity:</label>
-                                            <input type="number" id="quantity-${productDTO.id}" class="form-control" value="1" min="1" max="${productDTO.quantity}">
-                                        </div>
-                                        <button class="btn border border-secondary rounded-pill px-3 text-primary" 
-                                        onclick="addToCart('${productDTO.id}', '${productDTO.productName}', 
-                                        '${productDTO.price}', '${productDTO.quantity}', 
-                                        document.getElementById('quantity-${productDTO.id}').value)">Add to Cart</button>
+                    <label for="quantity-${productDTO.id}" class="me-2">Quantity:</label>
+                    <input type="number" id="quantity-${productDTO.id}" class="form-control" value="1" min="1" max="${productDTO.quantity}" readonly>
+                    <button class="btn btn-sm btn-primary ms-2" onclick="decreaseQuantity('quantity-${productDTO.id}')">-</button>
+                    <button class="btn btn-sm btn-primary ms-2" onclick="increaseQuantity('quantity-${productDTO.id}', ${productDTO.quantity})">+</button>
+                </div>
+                <button class="btn border border-secondary rounded-pill px-3 text-primary" 
+                    onclick="addToCart('${productDTO.id}', '${productDTO.productName}', 
+                    '${productDTO.price}', '${productDTO.quantity}', 
+                    document.getElementById('quantity-${productDTO.id}').value)">Add to Cart</button>
             </div>
         </div>
     `;
 
     return productElement;
+}
+
+function increaseQuantity(inputId, maxQuantity) {
+    const inputField = document.getElementById(inputId);
+    let currentValue = parseInt(inputField.value);
+    if (currentValue < maxQuantity) {
+        inputField.value = currentValue + 1;
+    }
+}
+
+function decreaseQuantity(inputId) {
+    const inputField = document.getElementById(inputId);
+    let currentValue = parseInt(inputField.value);
+    if (currentValue > 1) {
+        inputField.value = currentValue - 1;
+    }
 }
