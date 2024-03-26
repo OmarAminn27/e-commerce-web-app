@@ -10,11 +10,12 @@ import java.io.IOException;
 
 @WebServlet(urlPatterns = "/profile")
 public class ProfileServlet extends HttpServlet {
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-            req.getRequestDispatcher("/WEB-INF/pages/user-profile.html").forward(req,resp);
-    }
-
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        doPost(req, resp);
+        HttpSession session = req.getSession(false);
+        if (session != null) {
+            req.getRequestDispatcher("/WEB-INF/pages/user-profile.html").forward(req,resp);
+        } else {
+            resp.sendRedirect("login");
+        }
     }
 }

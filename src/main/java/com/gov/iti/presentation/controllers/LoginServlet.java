@@ -13,6 +13,8 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
+import static com.gov.iti.presentation.AdminValidator.ADMIN_USERNAME;
+
 @WebServlet(urlPatterns = "/login")
 public class LoginServlet extends HttpServlet {
     @Override
@@ -25,22 +27,30 @@ public class LoginServlet extends HttpServlet {
         String password = req.getParameter("password");
 
         User user = loginService.findUserByEmail(email);
-        System.out.println("user: " + user);
 
         if (user != null) {
+            System.out.println("user: " + user);
             boolean passwordMatches = loginService.passwordMatches(user, password);
             if (passwordMatches) {
                 System.out.println("the password matches");
                 HttpSession session = req.getSession(true);
                 session.setAttribute("user", user);
-                System.out.println("dispatching to home");
-                resp.sendRedirect(req.getContextPath() + "/home");
-            }else {
-                System.out.println( "the password does not match1");
+
+                // check if admin
+                if (user.getUsername().equals(ADMIN_USERNAME)){
+                    resp.sendRedirect("displayUsers");
+                } else {
+                    resp.sendRedirect(req.getContextPath() + "/home");
+                }
+
+            } else { // password does not match
+                System.out.println("the password does not match1");
+                RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/pages/login.html");
+                dispatcher.forward(req, resp);
             }
-        } else {
-            System.out.println( "the password does not match2");
-            RequestDispatcher dispatcher = req.getRequestDispatcher("login");
+        } else { // user is null
+            System.out.println("user is null");
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/pages/login.html");
             dispatcher.forward(req, resp);
         }
     }

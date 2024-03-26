@@ -8,6 +8,7 @@ import com.gov.iti.business.entities.CartItem;
 import com.gov.iti.business.entities.User;
 import com.gov.iti.business.services.CartService;
 import com.gov.iti.business.services.UserService;
+import com.gov.iti.presentation.AdminValidator;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.servlet.ServletException;
@@ -32,28 +33,36 @@ public class ShowCartServlet extends HttpServlet {
         //get loggedIn user
         HttpSession session = req.getSession(false);
         if (session != null){
+
+            // check if not admin first
             User loggedInUser = (User) session.getAttribute("user");
-            User user = new UserService(emf).getUser(loggedInUser.getId());
-            System.out.println(user.getUsername());
-            Cart cart = user.getCart();
-            Set<CartItem> cartItemSet = cartService.getCartItems(cart);
+            if (AdminValidator.IS_ADMIN(loggedInUser)) {
+                resp.sendRedirect("displayUsers");
+            } else {
+                User user = new UserService(emf).getUser(loggedInUser.getId());
+                System.out.println(user.getUsername());
+                Cart cart = user.getCart();
+                Set<CartItem> cartItemSet = cartService.getCartItems(cart);
 
-            // Convert CartItem entities to CartItemDto objects
-            List<CartItemDto> cartItemDtoList = new ArrayList<>();
-            for (CartItem cartItem : cartItemSet) {
-                CartItemDto cartItemDto = new CartItemDto(cartItem);
-                cartItemDtoList.add(cartItemDto);
+                // Convert CartItem entities to CartItemDto objects
+                List<CartItemDto> cartItemDtoList = new ArrayList<>();
+                for (CartItem cartItem : cartItemSet) {
+                    CartItemDto cartItemDto = new CartItemDto(cartItem);
+                    cartItemDtoList.add(cartItemDto);
+                }
+
+                Gson gson = new GsonBuilder().create();
+                String json = gson.toJson(cartItemDtoList);
+
+                System.out.println(json);
+
+                resp.setContentType("application/json");
+                resp.setCharacterEncoding("UTF-8");
+
+                resp.getWriter().print(json);
             }
-
-            Gson gson = new GsonBuilder().create();
-            String json = gson.toJson(cartItemDtoList);
-
-            System.out.println(json);
-
-            resp.setContentType("application/json");
-            resp.setCharacterEncoding("UTF-8");
-
-            resp.getWriter().print(json);
+        } else { //session is null
+            resp.sendRedirect("login");
         }
     }
 
