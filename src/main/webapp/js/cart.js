@@ -13,11 +13,10 @@ function addToCart(id, productName, price, productQuantity, userQuantity) {
         price: price,
         name: productName,
         userQuantity: userQuantity
-        // Add more properties as needed
     };
 
-    if (userQuantity > productQuantity) {
-        alert("Maximum quantity of this product to buy is " + productQuantity);
+    if (productQuantity === 0){
+        alert("Out of stock!");
         return;
     }
 

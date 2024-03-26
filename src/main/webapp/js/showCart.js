@@ -31,16 +31,11 @@ document.addEventListener("DOMContentLoaded", function () {
                     quantityInput.setAttribute("id", "cartItemQuantity" + productNameCell.textContent);
                     quantityInput.type = "number";
                     quantityInput.value = item.quantity;
-                    // if(item.quantity < item.productDTO.quantity){
-                    //     quantityInput.value = item.quantity;
-                    // }else{
+                    quantityInput.setAttribute("readOnly", true);
 
-                    //     quantityInput.value = item.productDTO.quantity;
-                    //     alert("Maximum quantity of " + item.productDTO.productName +"S to buy is " + item.productDTO.quantity);
-                    // }
                     quantityInput.min = "1";
-
                     quantityInput.max = item.productDTO.quantity;
+                    console.log("max quantity " +  item.productDTO.quantity);
                     quantityInput.classList.add("quantity-input");
 
                     quantityCell.appendChild(quantityInput);
@@ -48,11 +43,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     totalCell.setAttribute("id", item.productDTO.productName.toLowerCase() + "Price");
 
                     totalCell.textContent = item.totalPrice;
-                    // Update totalCost
-
 
                     totalCost += parseFloat(item.totalPrice);
-                    // Create buttons for adjusting quantity
 
                     // Increment item
                     var plusButton = document.createElement("button");
@@ -60,12 +52,16 @@ document.addEventListener("DOMContentLoaded", function () {
                     plusButton.id = "plusButton_" + item.productDTO.id; // Set ID for plus button
                     plusButton.classList.add("btn", "btn-primary", "quantity-adjust-btn");
                     plusButton.addEventListener("click", function () {
-                        quantityInput.value = parseInt(quantityInput.value) + 1;
-                        item.quantity = quantityInput.value;
-                        updateItemQuantity(item);
-                        updateTotalCost(); // Update total cost when quantity changes
-                        totalCost+= parseFloat(priceCell.textContent);
-                        totalCostElement.textContent = "Total Cost: $" + totalCost.toFixed(2);
+                        if (parseInt(quantityInput.value) < parseInt(quantityInput.max)) {
+                            quantityInput.value = parseInt(quantityInput.value) + 1;
+                            item.quantity = quantityInput.value;
+                            updateItemQuantity(item);
+                            updateTotalCost(); // Update total cost when quantity changes
+                            totalCost += parseFloat(priceCell.textContent);
+                            totalCostElement.textContent = "Total Cost: $" + totalCost.toFixed(2);
+                        } else {
+                            alert("Maximum quantity reached.");
+                        }
                     });
 
                     // Decrement item
@@ -79,10 +75,13 @@ document.addEventListener("DOMContentLoaded", function () {
                             item.quantity = quantityInput.value;
                             updateItemQuantity(item);
                             updateTotalCost(); // Update total cost when quantity changes
-                            totalCost-= parseFloat(priceCell.textContent);
+                            totalCost -= parseFloat(priceCell.textContent);
                             totalCostElement.textContent = "Total Cost: $" + totalCost.toFixed(2);
+                        } else {
+                            alert("Minimum quantity reached.");
                         }
                     });
+
                     quantityAdjustCell.appendChild(minusButton);
                     quantityAdjustCell.appendChild(quantityInput);
                     quantityAdjustCell.appendChild(plusButton);
@@ -154,13 +153,6 @@ function updateItemQuantity(item) {
     console.log(item.productDTO.price);
     console.log(item.productDTO.id);
     console.log(item.cartId);
-
-    // if(item.quantity < item.productDTO.quantity){
-    //     quantityInput.value = item.quantity;
-    // }else{
-    //     quantityInput.value = item.productDTO.quantity;
-    //     alert("Maximum quantity of the " + item.productDTO.productName +" product to buy is " + item.productDTO.quantity);
-    // }
 
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
