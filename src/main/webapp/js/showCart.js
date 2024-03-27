@@ -92,11 +92,12 @@ document.addEventListener("DOMContentLoaded", function () {
                     removeButton.textContent = "Remove";
                     removeButton.classList.add("btn", "btn-danger", "remove-btn"); // Add the specified classes
                     removeButton.addEventListener("click", function () {
+                        var itemTotalCost = parseFloat(totalCell.textContent);
+                        totalCost -= itemTotalCost; // Subtract the total cost of the removed item
+                        totalCostElement.textContent = "Total Cost: $" + totalCost.toFixed(2);
                         removeItemFromCart(row, item.productDTO.id);
                         updateItemQuantity(item);
                         updateTotalCost(); // Update total cost when item is removed
-                        totalCost-= parseFloat(priceCell.textContent) * parseFloat(quantityInput.textContent);
-                        totalCostElement.textContent = "Total Cost: $" + totalCost.toFixed(2);
                     });
                     removeButtonCell.appendChild(removeButton);
 
@@ -172,5 +173,5 @@ function updateItemQuantity(item) {
     console.log(item.productDTO.price * item.quantity);
 
     const itemTotalPrice = document.getElementById(item.productDTO.productName.toLowerCase() + "Price");
-    itemTotalPrice.textContent = item.productDTO.price * item.quantity;
+    itemTotalPrice.textContent = (item.productDTO.price * item.quantity).toFixed(2);
 }
