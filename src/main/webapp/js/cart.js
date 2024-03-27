@@ -15,7 +15,7 @@ function addToCart(id, productName, price, productQuantity, userQuantity) {
         userQuantity: userQuantity
     };
 
-    if (productQuantity === 0){
+    if (productQuantity === 0) {
         alert("Out of stock!");
         return;
     }

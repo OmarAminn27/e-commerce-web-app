@@ -21,3 +21,5 @@ document.getElementById("checkoutBtn").addEventListener("click", function () {
         console.log("Checkout canceled by the user.");
     }
 });
+
+
