@@ -3,6 +3,7 @@ package com.gov.iti.business.services;
 import com.gov.iti.business.entities.*;
 import com.gov.iti.persistence.daos.CartDao;
 import com.gov.iti.persistence.daos.ProductDao;
+import com.gov.iti.persistence.daos.UserDao;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
@@ -17,7 +18,7 @@ import java.util.stream.Collectors;
 public class CheckoutService {
 
     private final EntityManagerFactory entityManagerFactory;
-    private final CartDao cartDao = CartDao.getInstance();
+    private final UserDao userDao = UserDao.getInstance();
     private final ProductDao productDao = ProductDao.getInstance();
 
     public CheckoutService(EntityManagerFactory entityManagerFactory) {
@@ -25,14 +26,19 @@ public class CheckoutService {
     }
 
 
-    public void checkout(User user) {
+    public void checkout(User user1) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();
 
+        User user = userDao.findUserByName(user1.getUsername(), entityManager).orElse(null);
+
         // get cart items
+        System.out.println("trying to get car");
         Cart cart = user.getCart();
+        System.out.println("got cart");
         Set<CartItem> cartItems = cart.getCartItems();
+        System.out.println("got cart items");
 
         // deduct user credit
         BigDecimal cartTotal = BigDecimal.valueOf(cartItems.stream().mapToDouble(CartItem::getTotalPrice).sum());
@@ -43,6 +49,7 @@ public class CheckoutService {
         order.setOrderedAt(LocalDate.now());
         order.setUser(user);
         entityManager.persist(order);
+        System.out.println("order persisted succesffullyyy");
 
         // mapping every cart item to an order item and persisting it using stream and map
         Set<OrderItem> orderItems = cartItems.stream().map(cartItem -> {
@@ -64,6 +71,8 @@ public class CheckoutService {
 
             return orderItem;
         }).collect(Collectors.toSet());
+
+        System.out.println("order items created succesfully");
 
         emptyCart(entityManager, cart.getId());
         cart.setCartItems(new HashSet<>());

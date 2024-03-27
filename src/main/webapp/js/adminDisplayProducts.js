@@ -5,7 +5,7 @@ function displayProducts() {
     var xhr = new XMLHttpRequest();
 
     // Define the request parameters
-    xhr.open('GET', '/ecommerce/displayProducts', true);
+    xhr.open('GET', 'displayProducts', true);
 
     // Set up event listener to handle the response
     xhr.onload = function () {
@@ -109,7 +109,7 @@ function displayProducts() {
                     console.log(product);
                     // Create an XHR object
                     var xhr = new XMLHttpRequest();
-                    xhr.open('POST', '/ecommerce/updateProduct', true);
+                    xhr.open('POST', 'updateProduct', true);
                     xhr.setRequestHeader("Content-type", "application/json");
                     xhr.onload = function () {
                         if (xhr.status >= 200 && xhr.status < 300) {
@@ -143,7 +143,7 @@ function displayProducts() {
             function removeProduct(productName) {
                 // Create an XHR object
                 var xhr = new XMLHttpRequest();
-                xhr.open('POST', '/ecommerce/removeProduct', true);
+                xhr.open('POST', 'removeProduct', true);
                 xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
                 xhr.onload = function () {
                     if (xhr.status >= 200 && xhr.status < 300) {

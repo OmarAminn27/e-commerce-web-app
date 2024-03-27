@@ -2,7 +2,7 @@ document.getElementById("checkoutBtn").addEventListener("click", function () {
     var confirmed = confirm("Are you sure you want to proceed with the checkout?");
     if (confirmed) {
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", "/ecommerce/checkout", true);
+        xhr.open("POST", "checkout", true);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         xhr.onreadystatechange = function () {
             if (xhr.readyState === XMLHttpRequest.DONE) {

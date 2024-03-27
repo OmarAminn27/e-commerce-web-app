@@ -56,9 +56,7 @@ public class AddToCartServlet extends HttpServlet {
                 addCartItems(emf, user.getCart(), product, userQuantity, price);
             }
         }else {
-            //Manage this case
             System.out.println("no user logged in");
-            resp.sendRedirect("/login");
         }
     }
 

@@ -4,7 +4,7 @@ function fetchOrderHistory() {
     var xhr = new XMLHttpRequest();
 
     // Define the request parameters
-    xhr.open('GET', '/ecommerce/fetchOrderHistory', true);
+    xhr.open('GET', 'fetchOrderHistory', true);
 
     // Set up event listener to handle the response
     xhr.onreadystatechange = function () {

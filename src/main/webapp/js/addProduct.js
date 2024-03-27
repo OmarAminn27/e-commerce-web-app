@@ -62,11 +62,11 @@ function addProductRow() {
                 console.error('All fields must be filled out');
                 return;
             }
-            if(isNaN(productDTO.quantity) || isNaN(productDTO.price)){
+            if (isNaN(productDTO.quantity) || isNaN(productDTO.price)) {
                 console.error('Quantity and price must be numbers');
                 return;
             }
-            if(productDTO.quantity < 0 || productDTO.price < 0){
+            if (productDTO.quantity < 0 || productDTO.price < 0) {
                 console.error('Quantity and price must be positive');
                 return;
             }
@@ -75,7 +75,7 @@ function addProductRow() {
 
             // Send the product data to the server
             var xh2 = new XMLHttpRequest();
-            xh2.open('POST', '/ecommerce/addProduct', true);
+            xh2.open('POST', 'addProduct', true);
             xh2.setRequestHeader("Content-type", "application/json");
             xh2.onload = function () {
                 if (xh2.status >= 200 && xh2.status < 300) {
@@ -92,19 +92,19 @@ function addProductRow() {
 
             setTimeout(function () {
                 location.reload();
-            }, 500);
+            }, 1000);
         };
         reader.readAsDataURL(file);
     });
 }
 
-    // Clear input fields after adding the product
-    function clearInputFields() {
-        var inputs = document.querySelectorAll('#product-table tbody input');
-        inputs.forEach(function (input) {
-            input.value = '';
-        });
-    }
+// Clear input fields after adding the product
+function clearInputFields() {
+    var inputs = document.querySelectorAll('#product-table tbody input');
+    inputs.forEach(function (input) {
+        input.value = '';
+    });
+}
 
-    // Add event listener to the add product button
-    document.getElementById('add-product-btn').addEventListener('click', addProductRow);
+// Add event listener to the add product button
+document.getElementById('add-product-btn').addEventListener('click', addProductRow);

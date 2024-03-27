@@ -5,7 +5,7 @@ function updateUserProfiles() {
     var xhr = new XMLHttpRequest();
 
     // Define the request parameters
-    xhr.open('GET', '/ecommerce/updateUserProfile', true);
+    xhr.open('GET', 'updateUserProfile', true);
 
     // Set up event listener to handle the response
     xhr.onreadystatechange = function () {
@@ -48,7 +48,7 @@ function updateUserProfiles() {
 function showOrderHistory(username) {
     var xhr = new XMLHttpRequest();
 
-    xhr.open('POST', '/ecommerce/addOrderHistoryUserToContext', true);
+    xhr.open('POST', 'addOrderHistoryUserToContext', true);
     xhr.setRequestHeader('Content-Type', 'text/plain');
     xhr.onreadystatechange = function () {
         if (xhr.readyState === XMLHttpRequest.DONE) {

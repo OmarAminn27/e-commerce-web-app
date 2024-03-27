@@ -53,7 +53,7 @@ let pagination;
 window.onload = function () {
     console.log("reached home js");
     const xhr = new XMLHttpRequest();
-    const url = '/ecommerce/displayProducts';
+    const url = 'displayProducts';
 
     xhr.open('GET', url, true);
 
@@ -184,7 +184,7 @@ function createProduct(productDTO) {
                         <img src="https://iti.blob.core.windows.net/e-commerce-images/${productDTO.productName}.jpg" class="img-fluid rounded-top product-image" alt="${productDTO.productName}" style="width: 200px; height: 200px;">
                     </div>
                     <div class="d-flex flex-column justify-content-between">
-                        <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">${productDTO.category}</div>
+
                         <div class="p-4">
                             <h4>${productDTO.productName}</h4>
                             <p>${productDTO.description}</p>
@@ -195,15 +195,15 @@ function createProduct(productDTO) {
                     </div>
                 </div>
                 <div class="d-flex align-items-center mb-3">
-                    <label for="quantity-${productDTO.id}" class="me-2">Quantity:</label>
+                    <label for="quantity-${productDTO.id}" class="me-2" style="margin-left: 30px;">Quantity:</label>
                     <input type="number" id="quantity-${productDTO.id}" class="form-control" value="1" min="1" max="${productDTO.quantity}" readonly>
                     <button class="btn btn-sm btn-primary ms-2" onclick="decreaseQuantity('quantity-${productDTO.id}')">-</button>
-                    <button class="btn btn-sm btn-primary ms-2" onclick="increaseQuantity('quantity-${productDTO.id}', ${productDTO.quantity})">+</button>
+                    <button class="btn btn-sm btn-primary ms-2" onclick="increaseQuantity('quantity-${productDTO.id}', ${productDTO.quantity})"  style="margin-right: 30px;">+</button>
                 </div>
                 <button class="btn border border-secondary rounded-pill px-3 text-primary" 
                     onclick="addToCart('${productDTO.id}', '${productDTO.productName}', 
                     '${productDTO.price}', '${productDTO.quantity}', 
-                    document.getElementById('quantity-${productDTO.id}').value)">Add to Cart</button>
+                    document.getElementById('quantity-${productDTO.id}').value)" style="margin: 20px;">Add to Cart</button>
             </div>
         </div>
     `;
@@ -226,3 +226,6 @@ function decreaseQuantity(inputId) {
         inputField.value = currentValue - 1;
     }
 }
+
+
+// <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">${productDTO.category}</div>

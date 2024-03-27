@@ -1,7 +1,4 @@
 function addToCart(id, productName, price, productQuantity, userQuantity) {
-    // console.log("Product ID:", id);
-    // console.log("Product Name:", productName);
-    // console.log("Product Price:", price);
     productQuantity = parseInt(productQuantity);
     userQuantity = parseInt(userQuantity);
     console.log("Product Quantity:", productQuantity);
@@ -20,8 +17,25 @@ function addToCart(id, productName, price, productQuantity, userQuantity) {
         return;
     }
 
+    // Retrieve cart map from cookie if it exists, otherwise initialize it
+    let cartMap = {};
+    const cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)cartMap\s*=\s*([^;]*).*$)|^.*$/, "$1");
+    if (cookieValue) {
+        cartMap = JSON.parse(decodeURIComponent(cookieValue));
+    }
+
+    // Check if product already exists in cart, if yes, increase its quantity, otherwise add it to cart
+    if (cartMap[id]) {
+        cartMap[id] += userQuantity;
+    } else {
+        cartMap[id] = userQuantity;
+    }
+
+    // Save updated cart map back to cookie
+    document.cookie = "cartMap=" + encodeURIComponent(JSON.stringify(cartMap));
+
     const xhr = new XMLHttpRequest();
-    const url = '/ecommerce/addToCart';
+    const url = 'addToCart';
 
     xhr.open('POST', url, true);
     xhr.setRequestHeader('Content-Type', 'application/json');
@@ -40,18 +54,16 @@ function addToCart(id, productName, price, productQuantity, userQuantity) {
         console.error('Network error while adding product to cart:', xhr.statusText);
     };
 
-    // Retrieve existing cart items from local storage or initialize an empty array
-    let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-
-    // Add the new product to the cart
-    cartItems.push(product);
-
-    // Save the updated cart items back to local storage
-    localStorage.setItem('cartItems', JSON.stringify(cartItems));
-
     xhr.send(JSON.stringify({
         productId: id,
         userQuantity: userQuantity,
         totalPrice: price * userQuantity
     }));
 }
+
+// add to local storage
+// add to cart
+// add quantity w productID hashmap
+// upon sending we should clear local storage
+// login (servlet)
+// fetch local storage and update cart

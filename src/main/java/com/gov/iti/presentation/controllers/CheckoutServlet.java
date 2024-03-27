@@ -32,7 +32,9 @@ public class CheckoutServlet extends HttpServlet {
         CheckoutService checkoutService = new CheckoutService(emf);
 
         if (checkoutService.canAfford(user1)){
-            if (checkoutService.hasEnoughQuantity(user)) {
+            System.out.println("user can afford");
+            if (checkoutService.hasEnoughQuantity(user1)) {
+                System.out.println("there is enough quantity");
                 checkoutService.checkout(user1);
                 resp.getWriter().write("Check out successful!");
             } else {

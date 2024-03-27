@@ -12,7 +12,7 @@ public abstract class AbstractDao<T> {
         this.theClass = clazz;
     }
 
-    public Optional<T> findOneById(int id, EntityManager entityManager) {
+    public Optional<T> findOneById(Integer id, EntityManager entityManager) {
         T entity = entityManager.find(theClass, id);
         return Optional.ofNullable(entity);
     }
@@ -30,7 +30,7 @@ public abstract class AbstractDao<T> {
         return entity;
     }
 
-    public void deleteById(EntityManager entityManager,int entityId) {
+    public void deleteById(EntityManager entityManager, Integer entityId) {
         T entityToRemove = entityManager.find(theClass, entityId);
         if (entityToRemove != null) { // to avoid null pointer exceptions
             entityManager.remove(entityToRemove);

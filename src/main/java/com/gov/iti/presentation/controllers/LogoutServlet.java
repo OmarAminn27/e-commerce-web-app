@@ -19,7 +19,7 @@ public class LogoutServlet extends HttpServlet {
         Cookie[] cookies = req.getCookies();
         if (cookies != null) {
             for (Cookie cookie : cookies) {
-                if ("JSESSIONID".equals(cookie.getName())) {
+                if ("JSESSIONID".equals(cookie.getName()) || "cartMap".equals(cookie.getName())) {
                     cookie.setMaxAge(0);
                     resp.addCookie(cookie);
                     break;

@@ -24,7 +24,6 @@ public class HomeServlet extends HttpServlet {
         System.out.println("HomeServlet.doPost");
         HttpSession session = req.getSession(false);
         if (session != null) {
-
             // check if admin and redirect to admin page
             User user = (User) session.getAttribute("user");
             if (AdminValidator.IS_ADMIN(user)){
@@ -37,7 +36,7 @@ public class HomeServlet extends HttpServlet {
 
         } else {
             System.out.println("session is null");
-            req.getRequestDispatcher("/login").forward(req, resp);
+            req.getRequestDispatcher("/WEB-INF/pages/home.html").forward(req, resp);
         }
     }
 
