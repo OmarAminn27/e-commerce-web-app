@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import com.gov.iti.business.dtos.UserDTO;
 import com.gov.iti.business.entities.User;
 import com.gov.iti.business.services.ProfileService;
+import com.gov.iti.business.services.UserDataService;
 import com.gov.iti.business.utils.LocalDateTypeAdapter;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.servlet.ServletException;
@@ -24,9 +25,11 @@ public class ShowProfileServlet extends HttpServlet {
         System.out.println("ShowProfileServlet.doGet");
         EntityManagerFactory emf = (EntityManagerFactory) getServletContext().getAttribute("emf");
         ProfileService profileService = new ProfileService(emf);
+        UserDataService userDataService = new UserDataService(emf);
 
         HttpSession session = req.getSession();
         User user = (User) session.getAttribute("user");
+        user = userDataService.getUserById(user.getId());
         System.out.println(user.getUsername());
 
         UserDTO userDto = new UserDTO(user);
