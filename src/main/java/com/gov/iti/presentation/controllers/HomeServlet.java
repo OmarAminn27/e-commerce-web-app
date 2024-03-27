@@ -42,7 +42,6 @@ public class HomeServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("HomeServlet.doGet");
         doPost(req, resp);
     }
 }

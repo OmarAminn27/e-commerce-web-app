@@ -9,6 +9,7 @@ import com.gov.iti.persistence.daos.ProductDao;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
+import org.hibernate.Transaction;
 
 import java.io.ByteArrayInputStream;
 import java.util.Base64;
@@ -52,15 +53,41 @@ public class ProductUpdaterService {
         System.out.println("Product added successfully.");
     }
 
+    public void saveImageToAzure(Product product, String base64Image) {
+        // Decode Base64 string to byte array
+        byte[] imageBytes = Base64.getDecoder().decode(base64Image);
+
+
+        String blobName = product.getProductName().toUpperCase() + ".jpg";
+
+        // Create a BlobContainerClient
+        BlobContainerClient blobContainerClient = new BlobContainerClientBuilder()
+                .connectionString(connectionString)
+                .containerName(containerName)
+                .buildClient();
+
+        // Upload image to Azure Blob Storage
+        try (ByteArrayInputStream bis = new ByteArrayInputStream(imageBytes)) {
+            BlobClient blobClient = blobContainerClient.getBlobClient(blobName);
+            blobClient.upload(bis, imageBytes.length);
+            System.out.println("Image uploaded successfully to Azure Blob Storage.");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public void deleteProductByName (String productName) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();
 
         Product productByName = productDao.getProductByName(productName, entityManager);
+
+        // delete related items before deleting the product
+        deleteOrderItemsAndCartItemsByProductID(productByName.getId(), entityManager);
+
         System.out.println(productByName.getId());
         productDao.deleteById(entityManager, productByName.getId());
-//        entityManager.remove(productByName);
         System.out.println("Product deleted successfully.");
 
         // Azure Blob Storage Configuration
@@ -84,26 +111,11 @@ public class ProductUpdaterService {
         entityManager.close();
     }
 
-    public void saveImageToAzure(Product product, String base64Image) {
-        // Decode Base64 string to byte array
-        byte[] imageBytes = Base64.getDecoder().decode(base64Image);
+    public void deleteOrderItemsAndCartItemsByProductID (int productID, EntityManager entityManager) {
+        System.out.println("deleteOrderItemsAndCartItemsByProductID");
 
+        System.out.println("transaction began in deleteOrderItemsAndCartItemsByProductID");
+        productDao.removeOrderItemsAndCartItemsByProductID(productID, entityManager);
 
-        String blobName = product.getProductName().toUpperCase() + ".jpg";
-
-        // Create a BlobContainerClient
-        BlobContainerClient blobContainerClient = new BlobContainerClientBuilder()
-                .connectionString(connectionString)
-                .containerName(containerName)
-                .buildClient();
-
-        // Upload image to Azure Blob Storage
-        try (ByteArrayInputStream bis = new ByteArrayInputStream(imageBytes)) {
-            BlobClient blobClient = blobContainerClient.getBlobClient(blobName);
-            blobClient.upload(bis, imageBytes.length);
-            System.out.println("Image uploaded successfully to Azure Blob Storage.");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 }
