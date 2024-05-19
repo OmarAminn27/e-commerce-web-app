@@ -1,4 +1,4 @@
-#Fruitables
+# FRUITABLES 
 A web-based shopping application constructed with Jakarta EE 9 technologies, specifically Jakarta Servlet and Jakarta Persistence, supplemented by AJAX for dynamic content loading and user engagement and deployed on the AWS cloud platform.
 
 
