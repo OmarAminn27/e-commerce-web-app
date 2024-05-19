@@ -1,8 +1,8 @@
 #Fruitables
->A web-based shopping application constructed with Jakarta EE 9 technologies, specifically Jakarta Servlet and Jakarta Persistence, supplemented by AJAX for dynamic content loading and user engagement and deployed on the AWS cloud platform.
+A web-based shopping application constructed with Jakarta EE 9 technologies, specifically Jakarta Servlet and Jakarta Persistence, supplemented by AJAX for dynamic content loading and user engagement and deployed on the AWS cloud platform.
 
 
-# Features
+## Features
 * Registration and login
 * Add product `admin`
 * Edit product `admin` 
@@ -16,7 +16,7 @@
 * Search by category `customer`
 * Logout `customer and admin`
 
-# Technologies used
+## Technologies used
 * AWS EC2, RDS
 * Maven
 * Apache Tomcat 10.0.20
@@ -32,7 +32,7 @@
 * Spring Security Encoder
 
 
-# Contributors
+## Contributors
 * [Menna Moataz](https://github.com/MennaMoataz23)
 * [Ahmed Mosadek](https://github.com/AhmedMosadek)
 * [Omar Amin](https://github.com/OmarAminn27)
